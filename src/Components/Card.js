@@ -64,7 +64,7 @@ function PotionCardProp({ healthGain, moneyGain, talk, bonus }) {
     <div>
       <h3>{bonus}</h3>
       <p>{talk}</p>
-      <span>HealtGain :{healthGain}</span> <span>MoneyGain: {moneyGain}</span>
+      <span>HealthGain :{healthGain}</span> <span>MoneyGain: {moneyGain}</span>
     </div>
   );
 }
