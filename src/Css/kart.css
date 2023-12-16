@@ -35,11 +35,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: #343434;
+  background-color: #fff;
   border: none;
   padding: 5px;
   border-radius: 1.5rem;
-  /* box-shadow: 0px 0px 5px #000; */
 }
 .kartButton {
   width: 18rem;
@@ -89,8 +88,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid #dad4c8;
-  background-color: #dad4c8;
+  border: 1px solid #ffdd99;
+  background-color: #ffdd99;
   border-radius: 1rem;
   opacity: 0.8;
 }
@@ -115,13 +114,15 @@ body {
   width: 90%;
   padding: 5px;
   background-color: #dad4c8;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 .bonus {
   font-size: 10px;
   font-weight: 500;
-  /* border: 1px solid #401b00; */
-  /* border-radius: 0.3rem; */
+  background-color: #ffdd99;
+  border: 1px solid #ffdd99;
+  border-radius: 0.3rem;
+  box-shadow: 3px 3px 14px -3px rgba(0, 0, 0, 0.36);
   text-align: left;
   padding-left: 5px;
   color: black;
@@ -129,7 +130,7 @@ body {
 .talk {
   text-align: center;
   font-size: 11px;
-  color: #585858;
+  color: rgba(0, 0, 0, 0.6);
   font-style: italic;
   font-weight: 500;
 }
@@ -149,4 +150,7 @@ body {
 }
 .attack {
   border: 1px solid #ad1a1a;
+}
+.shield {
+  border: 1px solid #112a46;
 }
