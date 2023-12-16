@@ -7,7 +7,11 @@ function Card({ selectedCard }) {
     <div
       className={"kart"}
       style={{
-        backgroundImage: `url(${selectedCard.pngUrl})`,
+        backgroundImage: `linear-gradient(
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 255, 255, 0.2)
+        ),
+        url(${selectedCard.pngUrl})`,
         backgroundSize: "contain",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -15,8 +19,11 @@ function Card({ selectedCard }) {
     >
       <header className={"cardHeader"}>
         <h1>{selectedCard.name}</h1>
-        <span>{selectedCard.type === "Monster" ? "Enemy" : "Ally"}</span>{" "}
-        <span>{selectedCard.type}</span>
+        <div className={"types"}>
+          <span>{selectedCard.type === "Monster" ? "Enemy" : "Ally"}</span>{" "}
+          <span>&</span>
+          <span>{selectedCard.type}</span>
+        </div>
       </header>
 
       {selectedCard instanceof MonsterKart ? (
@@ -50,39 +57,56 @@ function Card({ selectedCard }) {
 
 function MonsterCardProperty({ attack, health, shield, bonus, talk }) {
   return (
-    <div>
-      <h3>{bonus}</h3>
-      <p>{talk}</p>
-      <span>Attack: {attack}</span> <span>Shield :{shield}</span>{" "}
-      <span>Health :{health}</span>
+    <div className="bottom">
+      <div className="bonus">
+        Remove all exhaustion tokens from this unit at the end of each round.
+      </div>{" "}
+      <p className="talk">{talk}</p>
+      <div className="posions">
+        <span className="posion attack">Attack: {attack}</span>{" "}
+        <span className="posion">Shield :{shield}</span>{" "}
+        <span className="posion health">Health :{health}</span>
+      </div>
     </div>
   );
 }
 
 function PotionCardProp({ healthGain, moneyGain, talk, bonus }) {
   return (
-    <div>
-      <h3>{bonus}</h3>
-      <p>{talk}</p>
-      <span>HealthGain :{healthGain}</span> <span>MoneyGain: {moneyGain}</span>
+    <div className="bottom">
+      <div className="bonus">
+        Remove all exhaustion tokens from this unit at the end of each round.
+      </div>
+      <p className="talk">{talk}</p>
+      <div className="posions">
+        <span className="posion health">HealthGain :{healthGain}</span>{" "}
+        <span className="posion">MoneyGain: {moneyGain}</span>
+      </div>
     </div>
   );
 }
 
 function EquipmentCardProp({ power, bonus, cost, talk }) {
   return (
-    <div>
-      <h3>{bonus}</h3>
-      <p>{talk}</p>
-      <span>Power :{power}</span> <span>Bonus: {cost}</span>
+    <div className="bottom">
+      <div className="bonus">
+        Remove all exhaustion tokens from this unit at the end of each round.
+      </div>
+      <p className="talk">{talk}</p>
+      <div className="posions">
+        <span className="posion">Power :{power}</span>{" "}
+        <span className="posion">Bonus: {cost}</span>
+      </div>
     </div>
   );
 }
 function MoneyCard({ gain, talk }) {
   return (
-    <div>
-      <p>{talk}</p>
-      <span>Money Gain :{gain}</span>
+    <div className="bottom">
+      <p className="talk">{talk}</p>
+      <div className="posions">
+        <span className="posion">Money Gain :{gain}</span>
+      </div>
     </div>
   );
 }

@@ -1,77 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 html {
-    font-size: 62.5%;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
-body{
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
 }
-.table{
-    width: 130rem;
-    height: 38rem;
-    display: flex;
-    margin-bottom: 30rem;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #9ea5ab;
-    border : 0.18rem solid black;
-    border-radius: 0.5rem;
+.table {
+  width: 130rem;
+  height: 38rem;
+  display: flex;
+  margin-bottom: 30rem;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #000;
+  border: 0.18rem solid #ccc;
+  border-radius: 0.5rem;
 }
-.kart{
-    width: 21rem;
-    height: 30rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: aliceblue;
-    border: none;
-    border-radius: 2rem;
+.kart {
+  width: 21rem;
+  height: 31rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #343434;
+  border: none;
+  padding: 5px;
+  border-radius: 1.5rem;
+  /* box-shadow: 0px 0px 5px #000; */
 }
-.kartButton{
-    width: 18rem;
-    height: 2.5rem;
-    border: none;
-    border-radius: 0.8rem;
-    background-color: aliceblue;
+.kartButton {
+  width: 18rem;
+  height: 3rem;
+  border: none;
+  border-radius: 1.5rem;
+  background-color: #dad4c8;
 }
-.kartButton:hover{
-    cursor: pointer;
-    background-color: #d8dfe6;
+.kartButton:hover {
+  cursor: pointer;
+  background-color: #d8dfe6;
 }
-.pozisyon{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    gap: 2rem;
+.pozisyon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2rem;
 }
-.images{
-    width: 10rem;
+.images {
+  width: 10rem;
 }
-.property{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 3rem;
-    gap: 0.5rem;
+.property {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 3rem;
+  gap: 0.5rem;
 }
-.text{
-    color: #112A46;
+.text {
+  color: #112a46;
 }
-.textBlock{
-    background-color: #d8dfe6;
-    padding: 1rem;
-    border-radius: 2rem;
+.textBlock {
+  background-color: #d8dfe6;
+  padding: 1rem;
+  border-radius: 2rem;
 }
-.kartName{
-    margin-bottom: 2rem;
+.kartName {
+  margin-bottom: 2rem;
+}
+
+.cardHeader {
+  margin-top: 5px;
+  padding: 5px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dad4c8;
+  background-color: #dad4c8;
+  border-radius: 1rem;
+  opacity: 0.8;
+}
+.cardHeader > h1 {
+  font-size: 23px;
+}
+.types {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.bottom {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  border: 1px solid #dad4c8;
+  border-radius: 1rem;
+  width: 90%;
+  padding: 5px;
+  background-color: #dad4c8;
+  opacity: 0.8;
+}
+.bonus {
+  font-size: 10px;
+  font-weight: 500;
+  /* border: 1px solid #401b00; */
+  /* border-radius: 0.3rem; */
+  text-align: left;
+  padding-left: 5px;
+  color: black;
+}
+.talk {
+  text-align: center;
+  font-size: 11px;
+  color: #585858;
+  font-style: italic;
+  font-weight: 500;
+}
+.posions {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.posion {
+  border: 1px solid #401b00;
+  padding: 5px 7px;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+.health {
+  border: 1px solid #149314;
+}
+.attack {
+  border: 1px solid #ad1a1a;
 }
