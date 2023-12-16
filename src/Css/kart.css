@@ -12,16 +12,23 @@ html {
 }
 body {
   height: 100vh;
+  margin-top: 3rem;
   display: flex;
-  align-items: center;
+  /*align-items: center;*/
   justify-content: center;
   font-family: "Roboto", sans-serif;
+}
+.gamer{
+  width: 40rem;
+  height: 28rem;
+  background-color: #d8dfe6;
+  border-radius: 0.5rem;
 }
 .table {
   width: 130rem;
   height: 38rem;
   display: flex;
-  margin-bottom: 30rem;
+  margin-bottom: 3rem;
   justify-content: space-around;
   align-items: center;
   background-color: #000;
