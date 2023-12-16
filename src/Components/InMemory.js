@@ -110,7 +110,7 @@ const potion4 = new PotionKart(
   "Ekipman İksiri",
   0,
   5,
-  "bonus",
+  "Okey",
   "Nope",
   1,
   process.env.PUBLIC_URL + `game/equipment.png`,

@@ -4,38 +4,43 @@ import { useState } from "react";
 import "./InMemory";
 import cards from "./InMemory";
 
-const allCards = [...cards];
-
+let allCards = [...cards];
+const defaultCard = allCards[0][0];
 function Table() {
-  const [typeIndexer, setTypeIndexer] = useState([0, 0, 0, 0]);
-  const [chosenCardIndex, setChosenCardIndex] = useState([0, 0, 0, 0]);
-  const selectedCards = typeIndexer.map(
-    (i, index) => allCards[i][chosenCardIndex[index]],
+  return (
+    <div className={"table"}>
+      <Pozisyon />
+      <Pozisyon />
+      <Pozisyon />
+      <Pozisyon />
+    </div>
   );
+}
 
-  function select(index) {
+function Pozisyon() {
+  const [selectedCard, setSelectedCard] = useState(defaultCard);
+
+  function select() {
+    if (allCards.length < 1) {
+      alert("Oyun Bitti Kazandınız!");
+      window.location.reload();
+      return;
+    }
+
     const typeIndex = Math.floor(Math.random() * allCards.length);
     const cardIndex = Math.floor(Math.random() * allCards[typeIndex].length);
 
-    const newChose = [...chosenCardIndex];
-    newChose[index] = cardIndex;
-    setChosenCardIndex(newChose);
-
-    const newTypeIndex = [...typeIndexer];
-    newTypeIndex[index] = typeIndex;
-    setTypeIndexer(newTypeIndex);
+    setSelectedCard(allCards[typeIndex][cardIndex]);
+    allCards = allCards
+      .map((p) => p.filter((s) => s !== allCards[typeIndex][cardIndex]))
+      .filter((k) => k.length > 0);
   }
-
   return (
-    <div className={"table"}>
-      {[0, 1, 2, 3].map((index) => (
-        <div className={"pozisyon"} key={index}>
-          <Card selectedCard={selectedCards[index]} />
-          <button onClick={() => select(index)} className={"kartButton"}>
-            Show
-          </button>
-        </div>
-      ))}
+    <div className={"pozisyon"}>
+      <Card selectedCard={selectedCard} />
+      <button onClick={() => select()} className={"kartButton"}>
+        Show
+      </button>
     </div>
   );
 }
