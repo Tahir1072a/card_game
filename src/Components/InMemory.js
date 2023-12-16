@@ -1,3 +1,7 @@
+export class Gamer {
+  constructor(id, name, pngUrl) {}
+}
+
 export class myCard {
   constructor(id, type, name, copyCount, pngUrl) {
     this.id = id;
@@ -276,7 +280,7 @@ const monster1 = new MonsterKart(
   3,
   "Merhaba, ben Tofu!",
   1,
-  process.env.PUBLIC_URL + `game/Tofu.png`,
+  process.env.PUBLIC_URL + `game/tofu.jpeg`,
 );
 
 const monster2 = new MonsterKart(
@@ -289,7 +293,7 @@ const monster2 = new MonsterKart(
   2,
   "Ben Tolp, dikkatli ol!",
   1,
-  process.env.PUBLIC_URL + `game/Tolp.png`,
+  process.env.PUBLIC_URL + `game/tolp.jpeg`,
 );
 
 const monster3 = new MonsterKart(

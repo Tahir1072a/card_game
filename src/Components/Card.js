@@ -12,7 +12,7 @@ function Card({ selectedCard }) {
           rgba(255, 255, 255, 0.1)
         ),
         url(${selectedCard.pngUrl})`,
-        backgroundSize: "contain",
+        backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
