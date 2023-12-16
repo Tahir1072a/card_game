@@ -21,7 +21,6 @@ export class EquipmentKart extends myCard {
 export class MoneyKart extends myCard {
   constructor(id, type, name, gain, talk, copyCount, pngUrl) {
     super(id, type, name, copyCount, pngUrl);
-    this.name = name;
     this.gain = gain;
     this.talk = talk;
   }

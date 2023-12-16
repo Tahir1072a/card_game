@@ -1,6 +1,6 @@
 import "../Css/kart.css";
 import "./InMemory";
-import { MonsterKart } from "./InMemory";
+import { EquipmentKart, MonsterKart, PotionKart } from "./InMemory";
 
 function Card({ selectedCard }) {
   return (
@@ -27,8 +27,22 @@ function Card({ selectedCard }) {
           bonus={selectedCard.bonus}
           talk={selectedCard.talk}
         />
+      ) : selectedCard instanceof PotionKart ? (
+        <PotionCardProp
+          bonus={selectedCard.bonus}
+          talk={selectedCard.talk}
+          moneyGain={selectedCard.moneyGain}
+          healthGain={selectedCard.healthGain}
+        />
+      ) : selectedCard instanceof EquipmentKart ? (
+        <EquipmentCardProp
+          cost={selectedCard.cost}
+          talk={selectedCard.talk}
+          bonus={selectedCard.bonus}
+          power={selectedCard.power}
+        />
       ) : (
-        ""
+        <MoneyCard talk={selectedCard.talk} gain={selectedCard.gain} />
       )}
     </div>
   );
@@ -39,7 +53,36 @@ function MonsterCardProperty({ attack, health, shield, bonus, talk }) {
     <div>
       <h3>{bonus}</h3>
       <p>{talk}</p>
-      <span>{attack}</span> <span>{shield}</span> <span>{health}</span>
+      <span>Attack: {attack}</span> <span>Shield :{shield}</span>{" "}
+      <span>Health :{health}</span>
+    </div>
+  );
+}
+
+function PotionCardProp({ healthGain, moneyGain, talk, bonus }) {
+  return (
+    <div>
+      <h3>{bonus}</h3>
+      <p>{talk}</p>
+      <span>HealtGain :{healthGain}</span> <span>MoneyGain: {moneyGain}</span>
+    </div>
+  );
+}
+
+function EquipmentCardProp({ power, bonus, cost, talk }) {
+  return (
+    <div>
+      <h3>{bonus}</h3>
+      <p>{talk}</p>
+      <span>Power :{power}</span> <span>Bonus: {cost}</span>
+    </div>
+  );
+}
+function MoneyCard({ gain, talk }) {
+  return (
+    <div>
+      <p>{talk}</p>
+      <span>Money Gain :{gain}</span>
     </div>
   );
 }
