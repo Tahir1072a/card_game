@@ -24,6 +24,33 @@ body {
   background-color: #d8dfe6;
   border-radius: 0.5rem;
 }
+.healthBar{
+  box-sizing: border-box;
+  width: 20rem;
+  height: 2rem;
+  background: #cccccc;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  position: relative;
+}
+.bar{
+  background: #c54;
+  width: 100%;
+  height: 1rem;
+  position: relative;
+
+  transition: width .5s linear;
+}
+.hit{
+  background: rgba(255,255,255,0.6);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 0rem;
+
+  transition: width .5s linear;
+}
 .table {
   width: 130rem;
   height: 38rem;

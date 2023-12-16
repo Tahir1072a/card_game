@@ -1,5 +1,13 @@
 export class Gamer {
-  constructor(id, name, pngUrl) {}
+  constructor(id, name, equipments, health, shield, money, pngUrl) {
+    this.id = id;
+    this.name = name;
+    this.equipments = equipments;
+    this.health = health;
+    this.shield = shield;
+    this.money = money;
+    this.pngUrl = pngUrl;
+  }
 }
 
 export class myCard {
