@@ -2,17 +2,7 @@ import { Gamer } from "./InMemory";
 import "../Css/kart.css";
 import { useState } from "react";
 
-const gamer = new Gamer(
-  0,
-  "Tahiri",
-  ["Yumruk", "Kılıç"],
-  19,
-  19,
-  10,
-  process.env.PUBLIC_URL + `game/avatar1.jpeg`
-);
-
-function GamerProfile() {
+function GamerProfile({ gamer }) {
   return (
     <div className={"gamer"}>
       <div className="top">

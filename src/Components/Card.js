@@ -3,6 +3,23 @@ import "./InMemory";
 import { EquipmentKart, MonsterKart, PotionKart } from "./InMemory";
 
 function Card({ selectedCard }) {
+  if (selectedCard.id === -1) {
+    return (
+      <div
+        className={"kart"}
+        style={{
+          backgroundImage: `linear-gradient(
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.1)
+        ),
+        url(${selectedCard.pngUrl})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      ></div>
+    );
+  }
   return (
     <div
       className={"kart"}
