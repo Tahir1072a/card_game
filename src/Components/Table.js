@@ -16,7 +16,7 @@ const defaultCard = new myCard(
   "default",
   "no-name",
   0,
-  process.env.PUBLIC_URL + `game/background.jpeg`,
+  process.env.PUBLIC_URL + `game/background.jpeg`
 );
 function Table({ gamer }) {
   return (
@@ -97,6 +97,7 @@ function Pozisyon({ gamer }) {
             >
               Buy
             </button>
+
             <button className={"kartButton"} onClick={DontBuy}>
               Don't Buy
             </button>

@@ -11,17 +11,16 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  height: 100vh;
-  margin-top: 3rem;
+  height: 100%;
+  margin-top: 1.5rem;
   display: flex;
-  /*align-items: center;*/
   justify-content: center;
   font-family: "Roboto", sans-serif;
 }
 
 .gamer {
-  width: 40rem;
-  height: 28rem;
+  width: 30rem;
+  height: 39rem;
 
   background-color: #d8dfe6;
   border-radius: 0.5rem;
@@ -29,12 +28,21 @@ body {
   display: flex;
   flex-direction: column;
 
-  padding: 15px;
+  padding: 10px;
+}
+.gamer-bottom-context {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "title title title"
+    "stats stats moves"
+    "stats stats moves";
 }
 .stats {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  grid-area: "stats";
 }
 .healthBar {
   width: 100%;
@@ -64,7 +72,7 @@ body {
 }
 .Bar {
   box-sizing: border-box;
-  width: 25rem;
+  width: 20rem;
   height: 1rem;
   background: #000;
   padding-right: 0.2rem;
@@ -82,56 +90,35 @@ body {
 
   transition: width 0.5s linear;
 }
-.top {
+.bar-container {
   display: flex;
-  align-items: center;
-  justify-content: start;
-  gap: 10px;
+  flex-direction: column;
+  align-items: start;
+  gap: 1px;
 }
-.gamer-money {
-  font-size: 18px;
-  border: 1px solid #ffdd99;
-  width: 75%;
-  text-align: center;
-  padding: 5px;
-  margin: auto auto;
-  border-radius: 50px;
-  box-shadow: 5px 5px 10px -10px rgba(0, 0, 0, 0.75);
-  background-color: #ffdd99;
-}
-.select {
-  width: 50%;
-  text-align: left;
-  padding: 7px;
-  background-color: #ffdd99;
-  border: 1px solid #ffdd99;
-  border-radius: 50px;
-  font-size: 16px;
-}
-
-.equipment {
+.moves {
+  margin-top: 1rem;
+  grid-area: moves;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 17px;
-  gap: 5px;
+  justify-content: center;
+  gap: 10px;
+  font-size: 13px;
 }
-.moves {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 4fr 3fr;
-  align-items: center;
-  /* border: 0.2rem solid black; */
-  padding: 1rem 0;
-  /* margin-top: 2rem; */
-  /* border-radius: 1.5rem; */
+.gamer-money {
+  font-size: 14px;
+  font-weight: 500;
+}
+.select {
+  padding: 0.5rem;
 }
 
 .table {
   width: 130rem;
   height: 38rem;
   display: flex;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   justify-content: space-around;
   align-items: center;
   background-color: #000;
@@ -151,11 +138,12 @@ body {
   border-radius: 1.5rem;
 }
 .kartButton {
-  width: 18rem;
+  width: 10rem;
   height: 3rem;
   border: none;
   border-radius: 1.5rem;
   background-color: #dad4c8;
+  margin: 0 5px;
 }
 .kartButton:hover {
   cursor: pointer;

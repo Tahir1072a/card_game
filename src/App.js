@@ -5,11 +5,11 @@ import { Gamer } from "./Components/InMemory";
 const gamer = new Gamer(
   0,
   "Tahiri",
-  ["Yumruk", "Kılıç"],
+  ["Yumruk", "Kılıç", "Tekme", "Balta"],
   19,
   19,
   10,
-  process.env.PUBLIC_URL + `game/avatar1.jpeg`,
+  process.env.PUBLIC_URL + `game/avatar1.jpeg`
 );
 
 function App() {
