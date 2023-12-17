@@ -102,8 +102,13 @@ body {
 .select {
   width: 50%;
   text-align: left;
-  padding: 5px;
+  padding: 7px;
+  background-color: #ffdd99;
+  border: 1px solid #ffdd99;
+  border-radius: 50px;
+  font-size: 16px;
 }
+
 .equipment {
   display: flex;
   flex-direction: column;
