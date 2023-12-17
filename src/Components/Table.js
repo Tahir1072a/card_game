@@ -16,20 +16,25 @@ const defaultCard = new myCard(
   "default",
   "no-name",
   0,
-  process.env.PUBLIC_URL + `game/background.jpeg`
+  process.env.PUBLIC_URL + `game/background.jpeg`,
 );
-function Table({ gamer }) {
+function Table({ gamer, setMoney, setHealth, buyEquipments }) {
   return (
     <div className={"table"}>
-      <Pozisyon gamer={gamer} />
-      <Pozisyon gamer={gamer} />
-      <Pozisyon gamer={gamer} />
-      <Pozisyon gamer={gamer} />
+      {[0, 1, 2, 3].map((p) => (
+        <Pozisyon
+          key={p}
+          gamer={gamer}
+          setMoney={setMoney}
+          setHealth={setHealth}
+          buyEquipments={buyEquipments}
+        />
+      ))}
     </div>
   );
 }
 
-function Pozisyon({ gamer }) {
+function Pozisyon({ gamer, setMoney, setHealth, buyEquipments }) {
   const [selectedCard, setSelectedCard] = useState(defaultCard);
   const [isOpen, setStateOpen] = useState(false);
 
@@ -52,22 +57,26 @@ function Pozisyon({ gamer }) {
 
   function moneyTake(selectedCard) {
     if (selectedCard instanceof MoneyKart) {
-      console.log(selectedCard.gain);
+      setMoney(selectedCard.gain);
     }
     setSelectedCard(defaultCard);
     setStateOpen(false);
   }
   function drinkPotion() {
     if (selectedCard instanceof PotionKart) {
-      console.log(selectedCard.healthGain);
-      console.log(selectedCard.moneyGain);
+      setHealth(selectedCard.healthGain);
+      setMoney(selectedCard.moneyGain);
     }
+
     setSelectedCard(defaultCard);
     setStateOpen(false);
   }
   function Buy(selectedCard) {
-    gamer.equipments.push(selectedCard);
-    console.log(gamer.equipments.map((p) => p));
+    if (selectedCard instanceof EquipmentKart) {
+      buyEquipments(selectedCard);
+      setMoney(-selectedCard.cost);
+    }
+
     setSelectedCard(defaultCard);
     setStateOpen(false);
   }
