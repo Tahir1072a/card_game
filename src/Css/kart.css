@@ -18,39 +18,110 @@ body {
   justify-content: center;
   font-family: "Roboto", sans-serif;
 }
-.gamer{
+
+.gamer {
   width: 40rem;
   height: 28rem;
+
   background-color: #d8dfe6;
   border-radius: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 15px;
 }
-.healthBar{
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.healthBar {
+  width: 100%;
+  height: 0.5rem;
+  background: #73e468;
+  border-radius: 0.25rem;
+
+  position: relative;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+
+  transition: width 0.5s linear;
+}
+.shieldBar {
+  width: 100%;
+  height: 0.5rem;
+  background: #4fa6ed;
+  border-radius: 0.25rem;
+
+  position: relative;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+
+  transition: width 0.5s linear;
+}
+.Bar {
   box-sizing: border-box;
-  width: 20rem;
-  height: 2rem;
-  background: #cccccc;
-  padding: 0.5rem;
+  width: 25rem;
+  height: 1rem;
+  background: #000;
+  padding-right: 0.2rem;
+  padding-left: 0.2rem;
   border-radius: 0.5rem;
   position: relative;
 }
-.bar{
-  background: #c54;
-  width: 100%;
-  height: 1rem;
-  position: relative;
-
-  transition: width .5s linear;
-}
-.hit{
-  background: rgba(255,255,255,0.6);
+.hit {
+  background: rgba(255, 255, 255, 0.6);
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   width: 0rem;
 
-  transition: width .5s linear;
+  transition: width 0.5s linear;
 }
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+}
+.gamer-money {
+  font-size: 18px;
+  border: 1px solid #ffdd99;
+  width: 75%;
+  text-align: center;
+  padding: 5px;
+  margin: auto auto;
+  border-radius: 50px;
+  box-shadow: 5px 5px 10px -10px rgba(0, 0, 0, 0.75);
+  background-color: #ffdd99;
+}
+.select {
+  width: 50%;
+  text-align: left;
+  padding: 5px;
+}
+.equipment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 17px;
+  gap: 5px;
+}
+.moves {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 4fr 3fr;
+  align-items: center;
+  /* border: 0.2rem solid black; */
+  padding: 1rem 0;
+  /* margin-top: 2rem; */
+  /* border-radius: 1.5rem; */
+}
+
 .table {
   width: 130rem;
   height: 38rem;
