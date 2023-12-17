@@ -9,6 +9,7 @@ html {
   font-size: 62.5%;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  background-color: #c29a4e;
 }
 body {
   height: 100%;
@@ -19,31 +20,58 @@ body {
 }
 
 .gamer {
-  width: 30rem;
-  height: 39rem;
-
-  background-color: #d8dfe6;
+  background-color: #000;
   border-radius: 0.5rem;
 
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 25px;
 
   padding: 10px;
+  margin-bottom: 20px;
+
+  width: fit-content;
 }
-.gamer-bottom-context {
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-areas:
-    "title title title"
-    "stats stats moves"
-    "stats stats moves";
-}
-.stats {
+.gamer-profile {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
-  grid-area: "stats";
 }
+.balance {
+  padding: 0.7rem;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  border: 1px solid #c7a25c;
+  border-radius: 2rem;
+  background-color: #c7a25c;
+  color: #000;
+}
+.select {
+  padding: 0.7rem;
+  border: 1px solid #fff;
+  background-color: #000;
+  border-radius: 5rem;
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: grab;
+}
+
+.kartButtonDisabled {
+  width: 10rem;
+  height: 3rem;
+  border: 1px solid #fff;
+  border-radius: 1.5rem;
+  background-color: rgba(179, 174, 174, 0.8);
+  margin: 0 5px;
+  color: #ccc;
+  cursor: not-allowed;
+  transition: 100ms ease-in;
+}
+
 .healthBar {
   width: 100%;
   height: 0.5rem;
@@ -74,7 +102,7 @@ body {
   box-sizing: border-box;
   width: 20rem;
   height: 1rem;
-  background: #000;
+  background: #fff;
   padding-right: 0.2rem;
   padding-left: 0.2rem;
   border-radius: 0.5rem;
@@ -96,22 +124,10 @@ body {
   align-items: start;
   gap: 1px;
 }
-.moves {
-  margin-top: 1rem;
-  grid-area: moves;
+.bars {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 13px;
-}
-.gamer-money {
-  font-size: 14px;
-  font-weight: 500;
-}
-.select {
-  padding: 0.5rem;
+  gap: 5px;
 }
 
 .table {
@@ -122,7 +138,7 @@ body {
   justify-content: space-around;
   align-items: center;
   background-color: #000;
-  border: 0.18rem solid #ccc;
+  border: 0.18rem solid #000;
   border-radius: 0.5rem;
 }
 .kart {
@@ -140,14 +156,18 @@ body {
 .kartButton {
   width: 10rem;
   height: 3rem;
-  border: none;
+  border: 1px solid #fff;
   border-radius: 1.5rem;
-  background-color: #dad4c8;
+  background-color: #000;
   margin: 0 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: 100ms ease-in;
 }
 .kartButton:hover {
   cursor: pointer;
-  background-color: #d8dfe6;
+  color: #000;
+  background-color: #fff;
 }
 .pozisyon {
   display: flex;

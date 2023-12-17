@@ -5,38 +5,28 @@ import { useState } from "react";
 function GamerProfile({ gamer }) {
   return (
     <div className={"gamer"}>
-      <div className="gamer-top-context">
+      <div className="gamer-profile">
         <img
           src={gamer.pngUrl}
           alt={"gamer_profile"}
-          style={{ width: "100%", marginBottom: "5px" }}
+          style={{ width: "5rem", borderRadius: "5rem" }}
         />
-      </div>
-
-      <div className="gamer-bottom-context">
-        <h2
-          className="gamer-name"
-          style={{ gridArea: "title", textAlign: "center" }}
-        >
+        <h2 style={{ textTransform: "uppercase", color: "white" }}>
           {gamer.name}
         </h2>
-
-        <HealthBar health={gamer.health} shield={gamer.shield} />
-
-        <div className="moves">
-          <div className="gamer-money">Balance: ${gamer.money}</div>
-
-          <div className="equipment">
-            <select className="select">
-              {gamer.equipments.map((p, i) => (
-                <option key={i} value={p}>
-                  {p}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
       </div>
+
+      <HealthBar health={gamer.health} shield={gamer.shield} />
+
+      <div className="balance">Money: ${gamer.money}</div>
+
+      <select className="select">
+        {gamer.equipments.map((p, i) => (
+          <option key={i} value={p}>
+            {p}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }
@@ -45,10 +35,20 @@ function HealthBar({ health, shield }) {
   const [hit, setHit] = useState(0);
 
   return (
-    <div className="stats">
+    <div className="bars">
       <div className="bar-container">
-        <div style={{ fontSize: "13px", fontWeight: "500" }}>Health</div>
-        <div className={"Bar"} style={{ width: "14rem" }}>
+        <div
+          style={{
+            textTransform: "uppercase",
+            fontSize: "1.1rem",
+            fontWeight: "500",
+            color: "white",
+            marginLeft: "2px",
+          }}
+        >
+          Health
+        </div>
+        <div className={"Bar"} style={{ width: "15rem" }}>
           <div className={"healthBar"}>
             <div
               className={"hit"}
@@ -59,8 +59,18 @@ function HealthBar({ health, shield }) {
       </div>
 
       <div className="bar-container">
-        <div style={{ fontSize: "13px", fontWeight: "500" }}>Shield</div>
-        <div className={"Bar"} style={{ width: "17rem" }}>
+        <div
+          style={{
+            textTransform: "uppercase",
+            fontSize: "1.1rem",
+            fontWeight: "500",
+            color: "white",
+            marginLeft: "2px",
+          }}
+        >
+          Shield
+        </div>
+        <div className={"Bar"}>
           <div className={"shieldBar"}>
             <div className={"hit"} style={{ width: `${hit}rem` }}></div>
           </div>
