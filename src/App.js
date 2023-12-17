@@ -1,21 +1,32 @@
 import Table from "./Components/Table";
 import GamerProfile from "./Components/Profile";
-import { Gamer } from "./Components/InMemory";
+import { EquipmentKart, Equipments, Gamer } from "./Components/InMemory";
 import { useState } from "react";
 
+const defaultEquipment = new EquipmentKart(
+  -1,
+  "Equipment",
+  "Yumruk",
+  0,
+  "None",
+  "Sadece ellerim",
+  0,
+  1,
+  "",
+);
 const gamer = new Gamer(
   0,
   "Tahiri",
-  ["Yumruk", "Kılıç", "Tekme", "Balta"],
+  [defaultEquipment],
   19,
   19,
-  1,
-  process.env.PUBLIC_URL + `game/avatar1.jpeg`
+  10,
+  process.env.PUBLIC_URL + `game/avatar1.jpeg`,
 );
 
 function App() {
   const [currentGamer, setGamer] = useState(gamer);
-
+  const [selectedEquipment, setSelectedEquipment] = useState(defaultEquipment);
   function reduceHealth(hitPoint) {
     if (hitPoint > currentGamer.health) {
       setGamer((g) => ({ ...g, health: 0 }));
@@ -36,28 +47,45 @@ function App() {
     }
   }
   function setHealth(gain) {
+    if (gain > 0 && currentGamer.health === 19) return;
     setGamer((g) => ({ ...g, health: g.health + gain }));
   }
   function setMoney(gain) {
     setGamer((g) => ({ ...g, money: g.money + gain }));
   }
-  function useEquipments(used) {
+  function usedEquipments(used) {
+    if (used.id === -1) return;
     setGamer((g) => ({
       ...g,
       equipments: g.equipments.filter((equipment) => equipment !== used),
     }));
   }
   function buyEquipments(bought) {
-    setGamer((g) => ({ ...g, equipments: g.equipments.push(bought) }));
+    setGamer((g) => ({ ...g, equipments: [...g.equipments, bought] }));
+  }
+  function setEquipment(id) {
+    if (id === -1) {
+      setSelectedEquipment(defaultEquipment);
+      return;
+    }
+    const newEquipment = Equipments.find((p) => p.id === id);
+    setSelectedEquipment(newEquipment);
   }
   return (
     <div className="app">
-      <GamerProfile gamer={currentGamer} />
+      <GamerProfile
+        gamer={currentGamer}
+        selectedEquipment={selectedEquipment}
+        setEquipment={setEquipment}
+      />
       <Table
         gamer={currentGamer}
         setMoney={setMoney}
         setHealth={setHealth}
         buyEquipments={buyEquipments}
+        usedEquipments={usedEquipments}
+        selectedEquipment={selectedEquipment}
+        reduceShield={reduceShield}
       />
     </div>
   );
