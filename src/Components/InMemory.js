@@ -48,7 +48,7 @@ export class PotionKart extends myCard {
     talk,
     bonus,
     copyCount,
-    pngUrl
+    pngUrl,
   ) {
     super(id, type, name, copyCount, pngUrl);
     this.healthGain = healthGain;
@@ -69,7 +69,7 @@ export class MonsterKart extends myCard {
     bonus,
     talk,
     copyCount,
-    pngUrl
+    pngUrl,
   ) {
     super(id, type, name, copyCount, pngUrl);
     this.attack = attack;
@@ -89,7 +89,7 @@ const canIksir = new PotionKart(
   "leziz bir içecek",
   "Nope",
   2,
-  process.env.PUBLIC_URL + `game/health.jpg`
+  process.env.PUBLIC_URL + `game/health.jpg`,
 );
 
 const potion2 = new PotionKart(
@@ -101,7 +101,7 @@ const potion2 = new PotionKart(
   "Ah buda ne!",
   "Nope",
   2,
-  process.env.PUBLIC_URL + `game/numbness.jpg`
+  process.env.PUBLIC_URL + `game/numbness.jpg`,
 );
 
 const potion3 = new PotionKart(
@@ -113,7 +113,7 @@ const potion3 = new PotionKart(
   "Gençleştim resmen bu kadar mı fark eder",
   "Nope",
   3,
-  process.env.PUBLIC_URL + `game/power.jpg`
+  process.env.PUBLIC_URL + `game/power.jpg`,
 );
 
 const potion4 = new PotionKart(
@@ -125,7 +125,7 @@ const potion4 = new PotionKart(
   "Okey",
   "Nope",
   1,
-  process.env.PUBLIC_URL + `game/equipment.jpg`
+  process.env.PUBLIC_URL + `game/equipment.jpg`,
 );
 
 const potion5 = new PotionKart(
@@ -137,7 +137,7 @@ const potion5 = new PotionKart(
   "poisoned",
   "Nope",
   1,
-  process.env.PUBLIC_URL + `game/posion.jpg`
+  process.env.PUBLIC_URL + `game/posion.jpg`,
 );
 
 // Ekipmanlar
@@ -150,7 +150,7 @@ const equipment1 = new EquipmentKart(
   "Kısa kılıç ile hızlı ve etkili bir saldırı!",
   3,
   1,
-  process.env.PUBLIC_URL + `game/short_sword.jpg`
+  process.env.PUBLIC_URL + `game/short_sword.jpg`,
 );
 
 const equipment2 = new EquipmentKart(
@@ -162,7 +162,7 @@ const equipment2 = new EquipmentKart(
   "Güçlü ve keskin uzun kılıç!",
   1,
   1,
-  process.env.PUBLIC_URL + `game/long_sword.jpg`
+  process.env.PUBLIC_URL + `game/long_sword.jpeg`,
 );
 
 const equipment3 = new EquipmentKart(
@@ -174,7 +174,7 @@ const equipment3 = new EquipmentKart(
   "Kısa baltayla hızlıca işleri halledin!",
   2,
   1,
-  process.env.PUBLIC_URL + `game/short_axe.jpg`
+  process.env.PUBLIC_URL + `game/short_axe.jpg`,
 );
 
 const equipment4 = new EquipmentKart(
@@ -186,7 +186,7 @@ const equipment4 = new EquipmentKart(
   "Güçlü ve etkili bir uzun baltaya sahip olun!",
   3,
   1,
-  process.env.PUBLIC_URL + `game/long_axe.jpg`
+  process.env.PUBLIC_URL + `game/long_axe.jpg`,
 );
 
 const equipment5 = new EquipmentKart(
@@ -198,7 +198,7 @@ const equipment5 = new EquipmentKart(
   "Topuzla rakiplerinizi ezin!",
   4,
   1,
-  process.env.PUBLIC_URL + `game/topuz.jpg`
+  process.env.PUBLIC_URL + `game/topuz.jpg`,
 );
 
 const equipment6 = new EquipmentKart(
@@ -210,7 +210,7 @@ const equipment6 = new EquipmentKart(
   "Uzaktan saldırı için güçlü bir tüfek!",
   5,
   1,
-  process.env.PUBLIC_URL + `game/rifle.jpg`
+  process.env.PUBLIC_URL + `game/rifle.jpeg`,
 );
 
 const equipment7 = new EquipmentKart(
@@ -222,7 +222,7 @@ const equipment7 = new EquipmentKart(
   "Patlayıcı bir bomba!",
   6,
   1,
-  process.env.PUBLIC_URL + `game/bomb.png`
+  process.env.PUBLIC_URL + `game/dinamit.jpeg`,
 );
 
 // Para Kartları
@@ -233,7 +233,7 @@ const money1 = new MoneyKart(
   0,
   "Bu sandık boş görünüyor.",
   1,
-  process.env.PUBLIC_URL + `game/empty_chest.jpg`
+  process.env.PUBLIC_URL + `game/empty_chest.jpg`,
 );
 
 const money2 = new MoneyKart(
@@ -243,7 +243,7 @@ const money2 = new MoneyKart(
   1,
   "Bir para birimi.",
   2,
-  process.env.PUBLIC_URL + `game/coin.jpg`
+  process.env.PUBLIC_URL + `game/coin.jpg`,
 );
 
 const money3 = new MoneyKart(
@@ -253,7 +253,7 @@ const money3 = new MoneyKart(
   2,
   "Çok sayıda para içeren bir kesek.",
   3,
-  process.env.PUBLIC_URL + `game/money_purse.jpg`
+  process.env.PUBLIC_URL + `game/money_purse.jpg`,
 );
 
 const money4 = new MoneyKart(
@@ -263,7 +263,7 @@ const money4 = new MoneyKart(
   3,
   "Küçük bir sandık, içi değerli olabilir.",
   4,
-  process.env.PUBLIC_URL + `game/small_chest.jpg`
+  process.env.PUBLIC_URL + `game/small_chest.jpg`,
 );
 
 const money5 = new MoneyKart(
@@ -273,7 +273,7 @@ const money5 = new MoneyKart(
   5,
   "Büyük ve ağır bir sandık.",
   5,
-  process.env.PUBLIC_URL + `game/big_chest.jpg`
+  process.env.PUBLIC_URL + `game/big_chest.jpg`,
 );
 
 // Canavarlar
@@ -288,7 +288,7 @@ const monster1 = new MonsterKart(
   3,
   "Merhaba, ben Tofu!",
   1,
-  process.env.PUBLIC_URL + `game/tofu.jpeg`
+  process.env.PUBLIC_URL + `game/tofu.jpeg`,
 );
 
 const monster2 = new MonsterKart(
@@ -301,7 +301,7 @@ const monster2 = new MonsterKart(
   2,
   "Ben Tolp, dikkatli ol!",
   1,
-  process.env.PUBLIC_URL + `game/tolp.jpeg`
+  process.env.PUBLIC_URL + `game/tolp.jpeg`,
 );
 
 const monster3 = new MonsterKart(
@@ -314,7 +314,7 @@ const monster3 = new MonsterKart(
   1,
   "Sayko burada, kimse bana yaklaşmasın!",
   1,
-  process.env.PUBLIC_URL + `game/sayko.jpg`
+  process.env.PUBLIC_URL + `game/sayko.jpg`,
 );
 
 const monster4 = new MonsterKart(
@@ -327,7 +327,7 @@ const monster4 = new MonsterKart(
   3,
   "Koska, güçlü bir rakip!",
   1,
-  process.env.PUBLIC_URL + `game/koska.jpg`
+  process.env.PUBLIC_URL + `game/koska.jpg`,
 );
 
 const monster5 = new MonsterKart(
@@ -340,7 +340,7 @@ const monster5 = new MonsterKart(
   1,
   "Ben Tom, savaşmak benim işim!",
   1,
-  process.env.PUBLIC_URL + `game/tom.jpg`
+  process.env.PUBLIC_URL + `game/tom.jpg`,
 );
 
 const monster6 = new MonsterKart(
@@ -353,7 +353,7 @@ const monster6 = new MonsterKart(
   1,
   "Jerry, sinsi bir rakip!",
   1,
-  process.env.PUBLIC_URL + `game/jerry.jpg`
+  process.env.PUBLIC_URL + `game/jerry.jpg`,
 );
 
 const monster7 = new MonsterKart(
@@ -366,7 +366,7 @@ const monster7 = new MonsterKart(
   2,
   "Cerberus, üç başlı bir yaratık!",
   1,
-  process.env.PUBLIC_URL + `game/cerberus.jpg`
+  process.env.PUBLIC_URL + `game/cerberus.jpg`,
 );
 
 const monster8 = new MonsterKart(
@@ -379,7 +379,7 @@ const monster8 = new MonsterKart(
   1,
   "Simurg, efsanevi bir yaratık!",
   1,
-  process.env.PUBLIC_URL + `game/simurg.jpg`
+  process.env.PUBLIC_URL + `game/simurg.jpg`,
 );
 
 const monster9 = new MonsterKart(
@@ -392,7 +392,7 @@ const monster9 = new MonsterKart(
   2,
   "Ben Golem, taş gibi güçlüyüm!",
   1,
-  process.env.PUBLIC_URL + `game/golem.jpg`
+  process.env.PUBLIC_URL + `game/golem.jpg`,
 );
 
 const monster10 = new MonsterKart(
@@ -405,7 +405,7 @@ const monster10 = new MonsterKart(
   2,
   "Minator burada, savaşa hazırım!",
   1,
-  process.env.PUBLIC_URL + `game/minator.jpg`
+  process.env.PUBLIC_URL + `game/minator.jpg`,
 );
 
 const Potions = [canIksir, potion2, potion3, potion4, potion5];
