@@ -9,7 +9,7 @@ html {
   font-size: 62.5%;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  background-color: #c29a4e;
+  background-color: #d8b03b;
 }
 body {
   height: 100%;
@@ -20,7 +20,7 @@ body {
 }
 
 .gamer {
-  background-color: #000;
+  background-color: #454341;
   border-radius: 0.5rem;
 
   display: flex;
@@ -44,20 +44,45 @@ body {
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
-  border: 1px solid #c7a25c;
+  border: 1px solid #d8b03b;
   border-radius: 2rem;
-  background-color: #c7a25c;
-  color: #000;
+  background-image: linear-gradient(
+    145deg,
+    hsl(29deg 61% 28%) 0%,
+    hsl(30deg 54% 32%) 12%,
+    hsl(31deg 49% 36%) 26%,
+    hsl(32deg 45% 40%) 38%,
+    hsl(33deg 41% 44%) 50%,
+    hsl(34deg 38% 48%) 61%,
+    hsl(36deg 39% 53%) 71%,
+    hsl(37deg 43% 57%) 81%,
+    hsl(38deg 48% 61%) 91%,
+    hsl(40deg 54% 66%) 100%
+  );
+  color: #fff;
 }
 .select {
   padding: 0.7rem;
-  border: 1px solid #fff;
-  background-color: #000;
+  border: 1px solid #d8b03b;
   border-radius: 5rem;
   font-weight: 500;
   font-size: 1.5rem;
   color: #fff;
   cursor: grab;
+
+  background: linear-gradient(
+    145deg,
+    hsl(29deg 61% 28%) 0%,
+    hsl(30deg 54% 32%) 12%,
+    hsl(31deg 49% 36%) 26%,
+    hsl(32deg 45% 40%) 38%,
+    hsl(33deg 41% 44%) 50%,
+    hsl(34deg 38% 48%) 61%,
+    hsl(36deg 39% 53%) 71%,
+    hsl(37deg 43% 57%) 81%,
+    hsl(38deg 48% 61%) 91%,
+    hsl(40deg 54% 66%) 100%
+  );
 }
 
 .kartButtonDisabled {
@@ -102,7 +127,7 @@ body {
   box-sizing: border-box;
   width: 20rem;
   height: 1rem;
-  background: #fff;
+  background: #000;
   padding-right: 0.2rem;
   padding-left: 0.2rem;
   border-radius: 0.5rem;
@@ -156,19 +181,43 @@ body {
 .kartButton {
   width: 10rem;
   height: 3rem;
-  border: 1px solid #fff;
+  border: 1px solid #d8b03b;
   border-radius: 1.5rem;
-  background-color: #000;
+  background: linear-gradient(
+    145deg,
+    hsl(29deg 61% 28%) 0%,
+    hsl(30deg 54% 32%) 12%,
+    hsl(31deg 49% 36%) 26%,
+    hsl(32deg 45% 40%) 38%,
+    hsl(33deg 41% 44%) 50%,
+    hsl(34deg 38% 48%) 61%,
+    hsl(36deg 39% 53%) 71%,
+    hsl(37deg 43% 57%) 81%,
+    hsl(38deg 48% 61%) 91%,
+    hsl(40deg 54% 66%) 100%
+  );
   margin: 0 5px;
   color: #fff;
   cursor: pointer;
-  transition: 100ms ease-in;
+  transition: 300ms ease-in;
 }
-.kartButton:hover {
+/* .kartButton:hover {
   cursor: pointer;
-  color: #000;
-  background-color: #fff;
-}
+  color: #fff;
+  background: linear-gradient(
+    230deg,
+    hsl(29deg 61% 28%) 0%,
+    hsl(30deg 54% 32%) 12%,
+    hsl(31deg 49% 36%) 26%,
+    hsl(32deg 45% 40%) 38%,
+    hsl(33deg 41% 44%) 50%,
+    hsl(34deg 38% 48%) 61%,
+    hsl(36deg 39% 53%) 71%,
+    hsl(37deg 43% 57%) 81%,
+    hsl(38deg 48% 61%) 91%,
+    hsl(40deg 54% 66%) 100%
+  );
+} */
 .pozisyon {
   display: flex;
   flex-direction: column;
