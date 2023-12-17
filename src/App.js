@@ -52,13 +52,13 @@ function App() {
   }
   return (
     <div className="app">
+      <GamerProfile gamer={currentGamer} />
       <Table
         gamer={currentGamer}
         setMoney={setMoney}
         setHealth={setHealth}
         buyEquipments={buyEquipments}
       />
-      <GamerProfile gamer={currentGamer} />
     </div>
   );
 }
