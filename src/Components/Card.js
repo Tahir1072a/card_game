@@ -95,7 +95,7 @@ function EquipmentCardProp({ power, bonus, cost, talk }) {
       <p className="talk">{talk}</p>
       <div className="posions">
         <span className="posion">Power :{power}</span>{" "}
-        <span className="posion">Bonus: {cost}</span>
+        <span className="posion">Cost: {cost}</span>
       </div>
     </div>
   );
