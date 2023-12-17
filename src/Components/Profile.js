@@ -1,8 +1,8 @@
-import { Gamer } from "./InMemory";
+import { EquipmentKart, Gamer } from "./InMemory";
 import "../Css/kart.css";
 import { useState } from "react";
 
-function GamerProfile({ gamer }) {
+function GamerProfile({ gamer, selectedEquipment, setEquipment }) {
   return (
     <div className={"gamer"}>
       <div className="gamer-profile">
@@ -20,10 +20,14 @@ function GamerProfile({ gamer }) {
 
       <div className="balance">Money: ${gamer.money}</div>
 
-      <select className="select">
+      <select
+        className="select"
+        value={selectedEquipment.id}
+        onChange={(e) => setEquipment(Number(e.target.value))}
+      >
         {gamer.equipments.map((p, i) => (
-          <option key={i} value={p}>
-            {p}
+          <option key={i} value={p.id}>
+            {p.name}
           </option>
         ))}
       </select>
@@ -32,7 +36,13 @@ function GamerProfile({ gamer }) {
 }
 
 function HealthBar({ health, shield }) {
-  const [hit, setHit] = useState(0);
+  const maxHealth = 19;
+
+  console.log(health);
+  if (health === 0) {
+    alert("Game Over! You are dead!");
+    window.location.reload();
+  }
 
   return (
     <div className="bars">
@@ -52,7 +62,7 @@ function HealthBar({ health, shield }) {
           <div className={"healthBar"}>
             <div
               className={"hit"}
-              style={{ width: `${hit - shield}rem` }}
+              style={{ width: `${(maxHealth - health) * (15 / 19)}rem` }}
             ></div>
           </div>
         </div>
@@ -72,7 +82,10 @@ function HealthBar({ health, shield }) {
         </div>
         <div className={"Bar"}>
           <div className={"shieldBar"}>
-            <div className={"hit"} style={{ width: `${hit}rem` }}></div>
+            <div
+              className={"hit"}
+              style={{ width: `${maxHealth - shield}rem` }}
+            ></div>
           </div>
         </div>
       </div>

@@ -18,7 +18,15 @@ const defaultCard = new myCard(
   0,
   process.env.PUBLIC_URL + `game/background.jpeg`,
 );
-function Table({ gamer, setMoney, setHealth, buyEquipments }) {
+function Table({
+  gamer,
+  setMoney,
+  setHealth,
+  buyEquipments,
+  usedEquipments,
+  selectedEquipment,
+  reduceShield,
+}) {
   return (
     <div className={"table"}>
       {[0, 1, 2, 3].map((p) => (
@@ -28,13 +36,24 @@ function Table({ gamer, setMoney, setHealth, buyEquipments }) {
           setMoney={setMoney}
           setHealth={setHealth}
           buyEquipments={buyEquipments}
+          usedEquipments={usedEquipments}
+          selectedEquipment={selectedEquipment}
+          reduceShield={reduceShield}
         />
       ))}
     </div>
   );
 }
 
-function Pozisyon({ gamer, setMoney, setHealth, buyEquipments }) {
+function Pozisyon({
+  gamer,
+  setMoney,
+  setHealth,
+  buyEquipments,
+  usedEquipments,
+  selectedEquipment,
+  reduceShield,
+}) {
   const [selectedCard, setSelectedCard] = useState(defaultCard);
   const [isOpen, setStateOpen] = useState(false);
 
@@ -50,9 +69,13 @@ function Pozisyon({ gamer, setMoney, setHealth, buyEquipments }) {
 
     setStateOpen(true);
     setSelectedCard(allCards[typeIndex][cardIndex]);
-    allCards = allCards
-      .map((p) => p.filter((s) => s !== allCards[typeIndex][cardIndex]))
-      .filter((k) => k.length > 0);
+    if (allCards[typeIndex][cardIndex].copyCount <= 1) {
+      allCards = allCards
+        .map((p) => p.filter((s) => s !== allCards[typeIndex][cardIndex]))
+        .filter((k) => k.length > 0);
+    } else {
+      allCards[typeIndex][cardIndex].copyCount += -1;
+    }
   }
 
   function moneyTake(selectedCard) {
@@ -86,9 +109,14 @@ function Pozisyon({ gamer, setMoney, setHealth, buyEquipments }) {
   }
   function Attack(selectedCard) {
     if (selectedCard instanceof MonsterKart) {
-      console.log(selectedCard.attack);
-      console.log(selectedCard.health);
-      console.log(selectedCard.shield);
+      const monsterLife = selectedCard.shield + selectedCard.health;
+      if (selectedEquipment instanceof EquipmentKart) {
+        if (selectedEquipment.power < monsterLife) {
+          reduceShield(selectedCard.attack);
+        } else {
+          usedEquipments(selectedEquipment);
+        }
+      }
     }
     setSelectedCard(defaultCard);
     setStateOpen(false);
@@ -100,9 +128,13 @@ function Pozisyon({ gamer, setMoney, setHealth, buyEquipments }) {
         selectedCard instanceof EquipmentKart ? (
           <div>
             <button
-              className={"kartButtonDisabled"}
+              className={
+                gamer.money >= selectedCard.cost
+                  ? "kartButton"
+                  : "kartButtonDisabled"
+              }
               onClick={() => Buy(selectedCard)}
-              disabled={gamer.money <= selectedCard.cost}
+              disabled={gamer.money < selectedCard.cost}
             >
               Buy
             </button>
