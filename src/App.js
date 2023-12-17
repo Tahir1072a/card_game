@@ -9,8 +9,8 @@ const gamer = new Gamer(
   ["Yumruk", "Kılıç", "Tekme", "Balta"],
   19,
   19,
-  10,
-  process.env.PUBLIC_URL + `game/avatar1.jpeg`,
+  1,
+  process.env.PUBLIC_URL + `game/avatar1.jpeg`
 );
 
 function App() {

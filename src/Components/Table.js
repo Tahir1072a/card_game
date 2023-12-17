@@ -100,9 +100,9 @@ function Pozisyon({ gamer, setMoney, setHealth, buyEquipments }) {
         selectedCard instanceof EquipmentKart ? (
           <div>
             <button
-              className={"kartButton"}
+              className={"kartButtonDisabled"}
               onClick={() => Buy(selectedCard)}
-              disabled={gamer.money >= selectedCard.cost}
+              disabled={gamer.money <= selectedCard.cost}
             >
               Buy
             </button>
