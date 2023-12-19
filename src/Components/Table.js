@@ -2,6 +2,7 @@ import "../Css/kart.css";
 import Card from "./Card";
 import { useState } from "react";
 import "./InMemory";
+
 import cards, {
   EquipmentKart,
   MoneyKart,
@@ -18,41 +19,16 @@ const defaultCard = new myCard(
   0,
   process.env.PUBLIC_URL + `game/background.jpeg`,
 );
-function Table({
-  gamer,
-  setMoney,
-  setHealth,
-  buyEquipments,
-  usedEquipments,
-  selectedEquipment,
-  reduceShield,
-}) {
-  return (
-    <div className={"table"}>
-      {[0, 1, 2, 3].map((p) => (
-        <Pozisyon
-          key={p}
-          gamer={gamer}
-          setMoney={setMoney}
-          setHealth={setHealth}
-          buyEquipments={buyEquipments}
-          usedEquipments={usedEquipments}
-          selectedEquipment={selectedEquipment}
-          reduceShield={reduceShield}
-        />
-      ))}
-    </div>
-  );
+export function Table({ children }) {
+  return <div className={"table"}>{children}</div>;
 }
 
-function Pozisyon({
+export function Pozisyon({
   gamer,
-  setMoney,
-  setHealth,
-  buyEquipments,
-  usedEquipments,
+  setGamer,
   selectedEquipment,
-  reduceShield,
+  setSelectedEquipment,
+  gameEngine,
 }) {
   const [selectedCard, setSelectedCard] = useState(defaultCard);
   const [isOpen, setStateOpen] = useState(false);
@@ -78,17 +54,17 @@ function Pozisyon({
     }
   }
 
-  function moneyTake(selectedCard) {
+  function handleMoneyTake(selectedCard) {
     if (selectedCard instanceof MoneyKart) {
-      setMoney(selectedCard.gain);
+      gameEngine.SetMoney(setGamer, selectedCard.gain);
     }
     setSelectedCard(defaultCard);
     setStateOpen(false);
   }
   function drinkPotion() {
     if (selectedCard instanceof PotionKart) {
-      setHealth(selectedCard.healthGain);
-      setMoney(selectedCard.moneyGain);
+      gameEngine.SetHealth(gamer, setGamer, selectedCard.healthGain);
+      gameEngine.SetMoney(setGamer, selectedCard.moneyGain);
     }
 
     setSelectedCard(defaultCard);
@@ -96,8 +72,8 @@ function Pozisyon({
   }
   function Buy(selectedCard) {
     if (selectedCard instanceof EquipmentKart) {
-      buyEquipments(selectedCard);
-      setMoney(-selectedCard.cost);
+      gameEngine.AddEquipment(setGamer, selectedCard);
+      gameEngine.SetMoney(setGamer, -selectedCard.cost);
     }
 
     setSelectedCard(defaultCard);
@@ -108,16 +84,13 @@ function Pozisyon({
     setSelectedCard(defaultCard);
   }
   function Attack(selectedCard) {
-    if (selectedCard instanceof MonsterKart) {
-      const monsterLife = selectedCard.shield + selectedCard.health;
-      if (selectedEquipment instanceof EquipmentKart) {
-        if (selectedEquipment.power < monsterLife) {
-          reduceShield(selectedCard.attack);
-        } else {
-          usedEquipments(selectedEquipment);
-        }
-      }
-    }
+    gameEngine.Attack(
+      gamer,
+      setGamer,
+      selectedEquipment,
+      setSelectedEquipment,
+      selectedCard,
+    );
     setSelectedCard(defaultCard);
     setStateOpen(false);
   }
@@ -139,41 +112,44 @@ function Pozisyon({
               Buy
             </button>
 
-            <button className={"kartButton"} onClick={DontBuy}>
-              Don't Buy
-            </button>
+            <CardButtons onClick={() => DontBuy(selectedCard)}>
+              Dont Buy
+            </CardButtons>
           </div>
         ) : selectedCard instanceof MonsterKart ? (
-          <div>
-            <button
-              className={"kartButton"}
-              onClick={() => Attack(selectedCard)}
-            >
-              Attack!
-            </button>
-          </div>
+          <CardButtons onClick={() => Attack(selectedCard)}>Attack</CardButtons>
         ) : selectedCard instanceof PotionKart ? (
-          <button
-            className={"kartButton"}
-            onClick={() => drinkPotion(selectedCard)}
-          >
+          <CardButtons onClick={() => drinkPotion(selectedCard)}>
             Drink
-          </button>
+          </CardButtons>
         ) : (
-          <button
-            className={"kartButton"}
-            onClick={() => moneyTake(selectedCard)}
-          >
+          <CardButtons onClick={() => handleMoneyTake(selectedCard)}>
             Take
-          </button>
+          </CardButtons>
         )
       ) : (
-        <button onClick={select} className={"kartButton"}>
-          Show
-        </button>
+        <CardButtons onClick={select}>Show</CardButtons>
       )}
     </div>
   );
 }
 
-export default Table;
+function CardButtons({ onClick, children }) {
+  return (
+    <button className={"kartButton"} onClick={onClick}>
+      {children}
+    </button>
+  );
+}
+
+// Buraya bir bak!
+
+// function AttackBox({ gamer }) {
+//   return (
+//     <div>
+//       {gamer.equipments.map((p) => (
+//         <Card selectedCard={p}></Card>
+//       ))}
+//     </div>
+//   );
+// }

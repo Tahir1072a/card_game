@@ -1,8 +1,11 @@
-import { EquipmentKart, Gamer } from "./InMemory";
 import "../Css/kart.css";
-import { useState } from "react";
 
-function GamerProfile({ gamer, selectedEquipment, setEquipment }) {
+export function GamerProfile({
+  gamer,
+  selectedEquipment,
+  setSelectedEquipment,
+  gameEngine,
+}) {
   return (
     <div className={"gamer"}>
       <div className="gamer-profile">
@@ -16,14 +19,19 @@ function GamerProfile({ gamer, selectedEquipment, setEquipment }) {
         </h2>
       </div>
 
-      <HealthBar health={gamer.health} shield={gamer.shield} />
+      <Bar health={gamer.health} shield={gamer.shield} />
 
       <div className="balance">Money: ${gamer.money}</div>
 
       <select
         className="select"
         value={selectedEquipment.id}
-        onChange={(e) => setEquipment(Number(e.target.value))}
+        onChange={(e) =>
+          gameEngine.ChangeSelectedEquipment(
+            setSelectedEquipment,
+            Number(e.target.value),
+          )
+        }
       >
         {gamer.equipments.map((p, i) => (
           <option key={i} value={p.id}>
@@ -35,62 +43,61 @@ function GamerProfile({ gamer, selectedEquipment, setEquipment }) {
   );
 }
 
-function HealthBar({ health, shield }) {
+function Bar({ health, shield }) {
   const maxHealth = 19;
-
-  console.log(health);
-  if (health === 0) {
-    alert("Game Over! You are dead!");
-    window.location.reload();
-  }
 
   return (
     <div className="bars">
-      <div className="bar-container">
-        <div
-          style={{
-            textTransform: "uppercase",
-            fontSize: "1.1rem",
-            fontWeight: "500",
-            color: "white",
-            marginLeft: "2px",
-          }}
-        >
-          Health
-        </div>
-        <div className={"Bar"} style={{ width: "15rem" }}>
-          <div className={"healthBar"}>
-            <div
-              className={"hit"}
-              style={{ width: `${(maxHealth - health) * (15 / 19)}rem` }}
-            ></div>
-          </div>
-        </div>
+      <BarContainer barName={"Health"}>
+        <HealthBar maxHealth={maxHealth} health={health} />
+      </BarContainer>
+      <BarContainer barName={"Shield"}>
+        <ShieldBar maxHealth={maxHealth} shield={shield} />
+      </BarContainer>
+    </div>
+  );
+}
+function BarContainer({ barName, children }) {
+  return (
+    <div className="bar-container">
+      <div
+        style={{
+          textTransform: "uppercase",
+          fontSize: "1.1rem",
+          fontWeight: "500",
+          color: "white",
+          marginLeft: "2px",
+        }}
+      >
+        {barName}
       </div>
+      {children}
+    </div>
+  );
+}
 
-      <div className="bar-container">
+function HealthBar({ maxHealth, health }) {
+  return (
+    <div className={"Bar"} style={{ width: "15rem" }}>
+      <div className={"healthBar"}>
         <div
-          style={{
-            textTransform: "uppercase",
-            fontSize: "1.1rem",
-            fontWeight: "500",
-            color: "white",
-            marginLeft: "2px",
-          }}
-        >
-          Shield
-        </div>
-        <div className={"Bar"}>
-          <div className={"shieldBar"}>
-            <div
-              className={"hit"}
-              style={{ width: `${maxHealth - shield}rem` }}
-            ></div>
-          </div>
-        </div>
+          className={"hit"}
+          style={{ width: `${(maxHealth - health) * (15 / 19)}rem` }}
+        ></div>
       </div>
     </div>
   );
 }
 
-export default GamerProfile;
+function ShieldBar({ maxHealth, shield }) {
+  return (
+    <div className={"Bar"}>
+      <div className={"shieldBar"}>
+        <div
+          className={"hit"}
+          style={{ width: `${maxHealth - shield}rem` }}
+        ></div>
+      </div>
+    </div>
+  );
+}

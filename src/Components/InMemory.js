@@ -136,7 +136,7 @@ const potion5 = new PotionKart(
   -2,
   "poisoned",
   "Nope",
-  1,
+  2,
   process.env.PUBLIC_URL + `game/posion.jpg`,
 );
 
@@ -232,7 +232,7 @@ const money1 = new MoneyKart(
   "Boş Sandık",
   0,
   "Bu sandık boş görünüyor.",
-  1,
+  2,
   process.env.PUBLIC_URL + `game/empty_chest.jpg`,
 );
 
@@ -242,7 +242,7 @@ const money2 = new MoneyKart(
   "Para",
   1,
   "Bir para birimi.",
-  2,
+  3,
   process.env.PUBLIC_URL + `game/coin.jpg`,
 );
 
@@ -252,7 +252,7 @@ const money3 = new MoneyKart(
   "Para Kesesi",
   2,
   "Çok sayıda para içeren bir kesek.",
-  3,
+  2,
   process.env.PUBLIC_URL + `game/money_purse.jpg`,
 );
 
@@ -262,7 +262,7 @@ const money4 = new MoneyKart(
   "Küçük Sandık",
   3,
   "Küçük bir sandık, içi değerli olabilir.",
-  4,
+  2,
   process.env.PUBLIC_URL + `game/small_chest.jpg`,
 );
 
@@ -272,7 +272,7 @@ const money5 = new MoneyKart(
   "Büyük Sandık",
   5,
   "Büyük ve ağır bir sandık.",
-  5,
+  1,
   process.env.PUBLIC_URL + `game/big_chest.jpg`,
 );
 
@@ -287,7 +287,7 @@ const monster1 = new MonsterKart(
   0,
   3,
   "Merhaba, ben Tofu!",
-  1,
+  3,
   process.env.PUBLIC_URL + `game/tofu.jpeg`,
 );
 
@@ -300,7 +300,7 @@ const monster2 = new MonsterKart(
   1,
   2,
   "Ben Tolp, dikkatli ol!",
-  1,
+  2,
   process.env.PUBLIC_URL + `game/tolp.jpeg`,
 );
 
@@ -391,7 +391,7 @@ const monster9 = new MonsterKart(
   10,
   2,
   "Ben Golem, taş gibi güçlüyüm!",
-  1,
+  2,
   process.env.PUBLIC_URL + `game/golem.jpg`,
 );
 
@@ -404,7 +404,7 @@ const monster10 = new MonsterKart(
   1,
   2,
   "Minator burada, savaşa hazırım!",
-  1,
+  2,
   process.env.PUBLIC_URL + `game/minator.jpg`,
 );
 
