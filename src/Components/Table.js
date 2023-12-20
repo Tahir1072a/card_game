@@ -1,6 +1,6 @@
 import "../Css/kart.css";
 import Card from "./Card";
-import { useState } from "react";
+import React, { Suspense, useState } from "react";
 import "./InMemory";
 
 import cards, {
@@ -10,6 +10,7 @@ import cards, {
   myCard,
   PotionKart,
 } from "./InMemory";
+import { EquipmentImg, GamerEquipmentGroup } from "./Profile";
 
 let allCards = [...cards];
 const defaultCard = new myCard(
@@ -32,6 +33,7 @@ export function Pozisyon({
 }) {
   const [selectedCard, setSelectedCard] = useState(defaultCard);
   const [isOpen, setStateOpen] = useState(false);
+  const [isHidden, setHiddenState] = useState(true);
 
   function select() {
     if (allCards.length < 1) {
@@ -83,13 +85,17 @@ export function Pozisyon({
     setStateOpen(false);
     setSelectedCard(defaultCard);
   }
-  function Attack(selectedCard) {
+  function HandleAttack() {
+    setHiddenState((old) => !old);
+  }
+  function onAttack(monster, equipment) {
+    setHiddenState(true);
     gameEngine.Attack(
       gamer,
       setGamer,
-      selectedEquipment,
+      equipment,
       setSelectedEquipment,
-      selectedCard,
+      monster,
     );
     setSelectedCard(defaultCard);
     setStateOpen(false);
@@ -117,7 +123,9 @@ export function Pozisyon({
             </CardButtons>
           </div>
         ) : selectedCard instanceof MonsterKart ? (
-          <CardButtons onClick={() => Attack(selectedCard)}>Attack</CardButtons>
+          <CardButtons onClick={() => HandleAttack(selectedCard)}>
+            Attack
+          </CardButtons>
         ) : selectedCard instanceof PotionKart ? (
           <CardButtons onClick={() => drinkPotion(selectedCard)}>
             Drink
@@ -129,6 +137,26 @@ export function Pozisyon({
         )
       ) : (
         <CardButtons onClick={select}>Show</CardButtons>
+      )}
+      {isHidden || (
+        <div
+          style={{
+            border: "2rem solid green",
+            position: "absolute",
+            zIndex: "1",
+            top: "25rem",
+            left: "55rem",
+          }}
+        >
+          <AttackBox>
+            <SelectEquipment
+              equipments={gamer.equipments}
+              onAttack={onAttack}
+              monster={selectedCard}
+            />
+            <Card selectedCard={selectedCard}></Card>
+          </AttackBox>
+        </div>
       )}
     </div>
   );
@@ -142,14 +170,62 @@ function CardButtons({ onClick, children }) {
   );
 }
 
-// Buraya bir bak!
+export function AttackBox({ children }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
-// function AttackBox({ gamer }) {
-//   return (
-//     <div>
-//       {gamer.equipments.map((p) => (
-//         <Card selectedCard={p}></Card>
-//       ))}
-//     </div>
-//   );
-// }
+function SelectEquipment({ equipments, onAttack, monster }) {
+  const [currentIndex, setIndex] = useState(0);
+  const count = equipments.length - 1;
+
+  function handleBack() {
+    if (currentIndex === 0) {
+      setIndex(count);
+    } else if (currentIndex > 0) {
+      setIndex((old) => old - 1);
+    }
+  }
+
+  function handleNext() {
+    if (currentIndex === count) {
+      setIndex(0);
+    } else if (currentIndex < count) {
+      setIndex((old) => old + 1);
+    }
+  }
+
+  function handleSelect(id) {
+    for (let i = 0; i < equipments.length; i++) {
+      if (equipments[i].id === id) {
+        setIndex(i);
+        return;
+      }
+    }
+  }
+
+  return (
+    <>
+      <div style={{ display: "flex" }}>
+        {equipments.map((p) => (
+          <div key={p.id} onClick={() => handleSelect(p.id)}>
+            <EquipmentImg equipment={p} />
+          </div>
+        ))}
+      </div>
+      <button onClick={handleBack}>Back</button>
+      <Card selectedCard={equipments[currentIndex]}></Card>
+      <button onClick={handleNext}>Next</button>
+      <button onClick={() => onAttack(monster, equipments[currentIndex])}>
+        Attack
+      </button>
+    </>
+  );
+}

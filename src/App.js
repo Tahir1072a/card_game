@@ -1,7 +1,7 @@
-import { Table, Pozisyon } from "./Components/Table";
+import { Table, Pozisyon, AttackBox } from "./Components/Table";
 import { GamerProfile } from "./Components/Profile";
 import { EquipmentKart, Gamer } from "./Components/InMemory";
-import { useState } from "react";
+import React, { useState } from "react";
 import { GameEngine } from "./Engine";
 
 const defaultEquipment = new EquipmentKart(

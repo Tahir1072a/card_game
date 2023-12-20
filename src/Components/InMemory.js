@@ -419,7 +419,7 @@ export const Equipments = [
   equipment7,
 ];
 const Moneys = [money1, money2, money3, money4, money5];
-const Monsters = [
+export const Monsters = [
   monster1,
   monster2,
   monster3,

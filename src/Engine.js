@@ -52,18 +52,12 @@ export class GameEngine {
     }
   }
 
-  Attack(
-    gamer,
-    setGamer,
-    selectedEquipment,
-    setSelectedEquipment,
-    selectedCard,
-  ) {
-    if (selectedCard instanceof MonsterKart) {
-      const monsterLife = selectedCard.shield + selectedCard.health;
+  Attack(gamer, setGamer, selectedEquipment, setSelectedEquipment, monster) {
+    if (monster instanceof MonsterKart) {
+      const monsterLife = monster.shield + monster.health;
       if (selectedEquipment instanceof EquipmentKart) {
         if (selectedEquipment.power < monsterLife) {
-          this.SetShield(gamer, setGamer, -selectedCard.attack);
+          this.SetShield(gamer, setGamer, -monster.attack);
         } else {
           this.DeleteEquipment(setGamer, selectedEquipment);
           this.ChangeSelectedEquipment(setSelectedEquipment);
