@@ -32,15 +32,6 @@ function Card({ selectedCard }) {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        // borderTop: `3px solid ${
-        //   selectedCard instanceof MonsterKart
-        //     ? "red"
-        //     : selectedCard instanceof MoneyKart
-        //     ? "#fcc419"
-        //     : selectedCard instanceof EquipmentKart
-        //     ? "#1c7ed6"
-        //     : "#a136c7"
-        // }`,
       }}
     >
       <header className={"cardHeader"}>

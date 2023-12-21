@@ -2,6 +2,7 @@ import "../Css/kart.css";
 import Card from "./Card";
 import React, { Suspense, useState } from "react";
 import "./InMemory";
+import "boxicons";
 
 import cards, {
   EquipmentKart,
@@ -18,7 +19,7 @@ const defaultCard = new myCard(
   "default",
   "no-name",
   0,
-  process.env.PUBLIC_URL + `game/background.jpeg`,
+  process.env.PUBLIC_URL + `game/background.jpeg`
 );
 export function Table({ children }) {
   return <div className={"table"}>{children}</div>;
@@ -95,7 +96,7 @@ export function Pozisyon({
       setGamer,
       equipment,
       setSelectedEquipment,
-      monster,
+      monster
     );
     setSelectedCard(defaultCard);
     setStateOpen(false);
@@ -139,24 +140,24 @@ export function Pozisyon({
         <CardButtons onClick={select}>Show</CardButtons>
       )}
       {isHidden || (
-        <div
-          style={{
-            border: "2rem solid green",
-            position: "absolute",
-            zIndex: "1",
-            top: "25rem",
-            left: "55rem",
-          }}
-        >
-          <AttackBox>
-            <SelectEquipment
-              equipments={gamer.equipments}
-              onAttack={onAttack}
-              monster={selectedCard}
-            />
+        <AttackBox>
+          <SelectEquipment
+            equipments={gamer.equipments}
+            onAttack={onAttack}
+            monster={selectedCard}
+          />
+          <div
+            style={{
+              height: "42rem",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "1rem",
+            }}
+          >
             <Card selectedCard={selectedCard}></Card>
-          </AttackBox>
-        </div>
+          </div>
+        </AttackBox>
       )}
     </div>
   );
@@ -171,15 +172,7 @@ function CardButtons({ onClick, children }) {
 }
 
 export function AttackBox({ children }) {
-  return (
-    <div
-      style={{
-        display: "flex",
-      }}
-    >
-      {children}
-    </div>
-  );
+  return <div className="attack-box">{children}</div>;
 }
 
 function SelectEquipment({ equipments, onAttack, monster }) {
@@ -212,20 +205,41 @@ function SelectEquipment({ equipments, onAttack, monster }) {
   }
 
   return (
-    <>
-      <div style={{ display: "flex" }}>
+    <div className="equipment">
+      <div className="main-equipment">
         {equipments.map((p) => (
           <div key={p.id} onClick={() => handleSelect(p.id)}>
             <EquipmentImg equipment={p} />
           </div>
         ))}
       </div>
-      <button onClick={handleBack}>Back</button>
-      <Card selectedCard={equipments[currentIndex]}></Card>
-      <button onClick={handleNext}>Next</button>
-      <button onClick={() => onAttack(monster, equipments[currentIndex])}>
-        Attack
-      </button>
-    </>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: ".7rem" }}>
+        <Card selectedCard={equipments[currentIndex]}></Card>
+
+        <div className="equipment-buttons">
+          <div onClick={handleBack} className="icon">
+            <box-icon
+              style={{ fill: "#fff" }}
+              name="chevron-left"
+              className="prev-icon"
+            ></box-icon>
+          </div>
+          <button
+            onClick={() => onAttack(monster, equipments[currentIndex])}
+            className="attack-button"
+          >
+            Attack
+          </button>
+          <div onClick={handleNext} className="icon">
+            <box-icon
+              style={{ fill: "#fff" }}
+              name="chevron-right"
+              className="next-icon"
+            ></box-icon>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
