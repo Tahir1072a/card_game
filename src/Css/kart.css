@@ -336,7 +336,12 @@ body {
 
   padding: 50px;
 
-  background-color: #7c7369;
+  /* background-color: #ccc; */
+
+  background-image: linear-gradient(
+    rgba(34, 34, 34, 0.4),
+    rgba(34, 34, 34, 0.4)
+  );
 }
 .main-equipment {
   display: flex;
