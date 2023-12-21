@@ -185,7 +185,7 @@ body {
 }
 .kart:hover {
   transform: scale(1.15);
-  box-shadow: 0px 5px 10px red;
+  box-shadow: 0px 7px 10px 3px rgba(255, 0, 0, 0.75);
 }
 
 .kartButton {
@@ -318,13 +318,14 @@ body {
 
 .attack-box {
   width: 80rem;
+  height: 50rem;
 
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-around;
 
-  border: 2rem solid #7c7369;
+  border: 0.1rem solid #7c7369;
   border-radius: 2rem;
 
   z-index: 1;
