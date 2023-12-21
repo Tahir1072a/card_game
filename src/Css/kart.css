@@ -154,12 +154,10 @@ body {
   flex-direction: column;
   gap: 5px;
 }
-.hidden{
-  display: none;
-}
+
 .table {
   width: 130rem;
-  height: 38rem;
+  height: 45rem;
   display: flex;
   margin-bottom: 1rem;
   justify-content: space-around;
@@ -180,7 +178,16 @@ body {
   border: none;
   padding: 5px;
   border-radius: 1.5rem;
+
+  transition: 150ms ease-in;
+  margin-bottom: 1.7rem;
+  margin-top: 1rem;
 }
+.kart:hover {
+  transform: scale(1.15);
+  box-shadow: 0px 5px 10px red;
+}
+
 .kartButton {
   width: 10rem;
   height: 3rem;
@@ -204,23 +211,7 @@ body {
   cursor: pointer;
   transition: 300ms ease-in;
 }
-/* .kartButton:hover {
-  cursor: pointer;
-  color: #fff;
-  background: linear-gradient(
-    230deg,
-    hsl(29deg 61% 28%) 0%,
-    hsl(30deg 54% 32%) 12%,
-    hsl(31deg 49% 36%) 26%,
-    hsl(32deg 45% 40%) 38%,
-    hsl(33deg 41% 44%) 50%,
-    hsl(34deg 38% 48%) 61%,
-    hsl(36deg 39% 53%) 71%,
-    hsl(37deg 43% 57%) 81%,
-    hsl(38deg 48% 61%) 91%,
-    hsl(40deg 54% 66%) 100%
-  );
-} */
+
 .pozisyon {
   display: flex;
   flex-direction: column;
@@ -323,4 +314,88 @@ body {
 }
 .shield {
   border: 1px solid #112a46;
+}
+
+.attack-box {
+  width: 80rem;
+
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  border: 2rem solid #7c7369;
+  border-radius: 2rem;
+
+  z-index: 1;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 50px;
+
+  background-color: #7c7369;
+}
+.main-equipment {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.profile-equipment {
+  position: relative;
+  height: 5rem;
+  width: 5rem;
+  border: 1px solid #939499;
+  border-radius: 2.5rem;
+  cursor: pointer;
+}
+.equipment-img {
+  position: absolute;
+  width: 5rem;
+  border: 1px solid #939499;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.equipment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.equipment-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.icon {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid black;
+  background-color: #000;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.next-icon {
+  position: absolute;
+}
+.prev-icon {
+  position: absolute;
+}
+
+.attack-button {
+  padding: 7px 15px;
+  border: 1px solid black;
+  background-color: #000;
+  border-radius: 50px;
+  cursor: pointer;
+  color: #fff;
 }

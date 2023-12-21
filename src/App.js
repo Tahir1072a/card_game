@@ -13,7 +13,7 @@ const defaultEquipment = new EquipmentKart(
   "Sadece ellerim",
   0,
   1,
-  "",
+  process.env.PUBLIC_URL + `game/punch.jpg`
 );
 const gamer = new Gamer(
   0,
@@ -22,7 +22,7 @@ const gamer = new Gamer(
   19,
   19,
   2,
-  process.env.PUBLIC_URL + `game/avatar1.jpeg`,
+  process.env.PUBLIC_URL + `game/avatar1.jpeg`
 );
 const gameEngine = new GameEngine(defaultEquipment, 19);
 function App() {

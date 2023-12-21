@@ -29,7 +29,7 @@ export function GamerProfile({
 
 export function GamerEquipmentGroup({ gamer }) {
   return (
-    <div style={{ display: "flex" }}>
+    <div className="main-equipment">
       {gamer.equipments.map((p) => (
         <EquipmentImg key={p.id} equipment={p} />
       ))}
@@ -38,17 +38,13 @@ export function GamerEquipmentGroup({ gamer }) {
 }
 export function EquipmentImg({ equipment }) {
   return (
-    <img
-      style={{
-        height: "4rem",
-        width: "4rem",
-        borderRadius: "50%",
-        marginRight: "0.2rem",
-        border: "0.3rem solid blue",
-      }}
-      src={equipment.pngUrl}
-      alt={equipment.name}
-    />
+    <div className="profile-equipment">
+      <img
+        className="equipment-img"
+        src={equipment.pngUrl}
+        alt={equipment.name}
+      ></img>
+    </div>
   );
 }
 function Bar({ health, shield }) {
