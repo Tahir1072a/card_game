@@ -12,12 +12,18 @@ export class GameEngine {
 
   SetHealth(gamer, setGamer, gain) {
     if (gain > 0 && gamer.health === this.maxHealt) return;
-    if (gamer.health >= 0) {
+    const newHealth = gamer.health + gain;
+    if (newHealth <= 0) {
+      setGamer((old) => ({ ...old, health: 0 }));
+    } else if (newHealth > 0) {
       setGamer((old) => ({ ...old, health: old.health + gain }));
     }
-    if (gamer.health <= 0) {
-      alert("You lose the game!");
-      window.location.reload();
+
+    if (newHealth <= 0) {
+      setTimeout(() => {
+        alert("Game over! You last the game.");
+        window.location.reload();
+      }, 800);
     }
   }
   SetShield(gamer, setGamer, gain) {

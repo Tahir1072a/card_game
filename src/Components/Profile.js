@@ -86,7 +86,7 @@ function BarContainer({ barName, children }) {
 
 function HealthBar({ maxHealth, health }) {
   return (
-    <div className={"Bar"} style={{ width: "15rem" }}>
+    <div className={"Bar"} style={{ width: "15.5rem" }}>
       <div className={"healthBar"}>
         <div
           className={"hit"}
