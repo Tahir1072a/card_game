@@ -71,4 +71,9 @@ export class GameEngine {
       }
     }
   }
+
+  IsWin(equipment, monsterLife) {
+    debugger;
+    return equipment.power >= monsterLife;
+  }
 }

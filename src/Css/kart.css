@@ -9,7 +9,10 @@ html {
   font-size: 62.5%;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  background-color: #d8b03b;
+  /*background-color: #d8b03b;*/
+  /*background: rgb(255,87,121);*/
+  background: rgb(255,107,107);
+  background: radial-gradient(circle, rgb(245, 159, 0) 0%, rgb(213, 112, 32) 80%, rgb(227, 102, 32) 95%);
 }
 body {
   height: 100%;
@@ -162,8 +165,9 @@ body {
   margin-bottom: 1rem;
   justify-content: space-around;
   align-items: center;
-  background-color: #000;
-  border: 0.18rem solid #000;
+  background: rgb(245,159,0);
+  background: radial-gradient(circle, rgba(245,159,0,1) 0%, rgba(2,0,36,0.7) 100%);
+  border: 0.3rem solid rgba(0, 0, 0, 0.6);
   border-radius: 0.5rem;
 }
 .kart {
@@ -185,7 +189,7 @@ body {
 }
 .kart:hover {
   transform: scale(1.15);
-  box-shadow: 0 0 0.5rem 0.2rem rgba(255, 0, 0, 0.9);
+  /*box-shadow: 0 0 0.5rem 0.2rem rgba(255, 0, 0, 0.9);*/
 }
 
 .kartButton {
@@ -344,6 +348,7 @@ body {
   );
   box-shadow: 0 0.5rem 5rem 0.2rem;
   backdrop-filter: blur(0.3rem);
+  opacity: 0;
 }
 .main-equipment {
   display: flex;

@@ -19,7 +19,7 @@ const defaultCard = new myCard(
   "default",
   "no-name",
   0,
-  process.env.PUBLIC_URL + `game/background.jpeg`
+  process.env.PUBLIC_URL + `game/background.jpeg`,
 );
 export function Table({ children }) {
   return <div className={"table"}>{children}</div>;
@@ -96,7 +96,7 @@ export function Pozisyon({
       setGamer,
       equipment,
       setSelectedEquipment,
-      monster
+      monster,
     );
     setSelectedCard(defaultCard);
     setStateOpen(false);
@@ -140,12 +140,12 @@ export function Pozisyon({
         <CardButtons onClick={select}>Show</CardButtons>
       )}
       {isHidden || (
-        <AttackBox>
-          <SelectEquipment
-            equipments={gamer.equipments}
-            onAttack={onAttack}
-            monster={selectedCard}
-          />
+        <AttackBox
+          gameEngine={gameEngine}
+          onAttack={onAttack}
+          monster={selectedCard}
+          gamer={gamer}
+        >
           <div
             style={{
               height: "42rem",
@@ -171,11 +171,50 @@ function CardButtons({ onClick, children }) {
   );
 }
 
-export function AttackBox({ children }) {
-  return <div className="attack-box">{children}</div>;
+export function AttackBox({ gameEngine, onAttack, monster, gamer, children }) {
+  const [opacity, setOpacity] = useState(0);
+  const [isAttack, setIsAttack] = useState(false);
+  const [isDefeat, setIsDefeat] = useState(false);
+
+  if (!isAttack) {
+    setTimeout(() => {
+      setOpacity(1);
+    }, 10);
+  }
+
+  const defeatStyle = {
+    backgroundColor: "rgba(255,0,0,0.5)",
+  };
+  const victoryStyle = {
+    backgroundColor: "rgba(0,255,0,0.4)",
+  };
+
+  function handleAttack(equipment) {
+    setIsAttack(true);
+    setIsDefeat(!gameEngine.IsWin(equipment, monster.health + monster.shield));
+    setTimeout(() => setOpacity(0), 1000);
+    setTimeout(() => {
+      onAttack(monster, equipment);
+    }, 1600);
+  }
+
+  return (
+    <div
+      style={{
+        transition:
+          "background-color 0.1s ease-in-out, opacity 0.6s ease-in-out",
+        opacity: opacity,
+        ...(isAttack ? (isDefeat ? defeatStyle : victoryStyle) : {}),
+      }}
+      className="attack-box"
+    >
+      <SelectEquipment equipments={gamer.equipments} onAttack={handleAttack} />
+      {children}
+    </div>
+  );
 }
 
-function SelectEquipment({ equipments, onAttack, monster }) {
+function SelectEquipment({ equipments, onAttack }) {
   const [currentIndex, setIndex] = useState(0);
   const count = equipments.length - 1;
 
@@ -226,7 +265,7 @@ function SelectEquipment({ equipments, onAttack, monster }) {
             ></box-icon>
           </div>
           <button
-            onClick={() => onAttack(monster, equipments[currentIndex])}
+            onClick={() => onAttack(equipments[currentIndex])}
             className="attack-button"
           >
             Attack
