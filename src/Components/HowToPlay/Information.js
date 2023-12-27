@@ -12,20 +12,12 @@ export function Information() {
   const [isEntered, setIsEntered] = useState(false);
 
   function HandleEnterEvent() {
-    setIsEntered(true);
-  }
-
-  function HandleLeaveEvent() {
-    setIsEntered(false);
+    setIsEntered((old) => !old);
   }
 
   return (
     <div style={{ fontSize: "3rem" }}>
-      <span
-        style={{ cursor: "default" }}
-        onMouseEnter={HandleEnterEvent}
-        onMouseLeave={HandleLeaveEvent}
-      >
+      <span style={{ cursor: "pointer" }} onClick={HandleEnterEvent}>
         &#x1F6C8;
       </span>
 
