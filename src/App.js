@@ -1,8 +1,9 @@
-import { Table, Pozisyon, AttackBox } from "./Components/Table";
-import { GamerProfile } from "./Components/Profile";
 import { EquipmentKart, Gamer } from "./Components/InMemory";
 import React, { useState } from "react";
 import { GameEngine } from "./Engine";
+import { GamerProfile } from "./Components/Profile/GamerProfile";
+import { CurrentCard, Table } from "./Components/Table/Table";
+import { Information } from "./Components/HowToPlay/Information";
 
 const defaultEquipment = new EquipmentKart(
   -1,
@@ -37,9 +38,10 @@ function App() {
         setSelectedEquipment={setSelectedEquipment}
         gameEngine={gameEngine}
       />
+      <Information />
       <Table>
         {[0, 1, 2, 3].map((p) => (
-          <Pozisyon
+          <CurrentCard
             key={p}
             gamer={currentGamer}
             setGamer={setGamer}

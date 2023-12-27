@@ -1,53 +1,5 @@
-import "../Css/kart.css";
-
-export function GamerProfile({
-  gamer,
-  selectedEquipment,
-  setSelectedEquipment,
-  gameEngine,
-}) {
-  return (
-    <div className={"gamer"}>
-      <div className="gamer-profile">
-        <img
-          src={gamer.pngUrl}
-          alt={"gamer_profile"}
-          style={{ width: "5rem", borderRadius: "5rem" }}
-        />
-        <h2 style={{ textTransform: "uppercase", color: "white" }}>
-          {gamer.name}
-        </h2>
-      </div>
-
-      <Bar health={gamer.health} shield={gamer.shield} />
-
-      <div className="balance">Money: ${gamer.money}</div>
-      <GamerEquipmentGroup gamer={gamer} />
-    </div>
-  );
-}
-
-export function GamerEquipmentGroup({ gamer }) {
-  return (
-    <div className="main-equipment">
-      {gamer.equipments.map((p) => (
-        <EquipmentImg key={p.id} equipment={p} />
-      ))}
-    </div>
-  );
-}
-export function EquipmentImg({ equipment }) {
-  return (
-    <div className="profile-equipment">
-      <img
-        className="equipment-img"
-        src={equipment.pngUrl}
-        alt={equipment.name}
-      ></img>
-    </div>
-  );
-}
-function Bar({ health, shield }) {
+import "../../Css/kart.css";
+export function Bar({ health, shield }) {
   const maxHealth = 19;
 
   return (

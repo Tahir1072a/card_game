@@ -11,8 +11,13 @@ html {
   scroll-behavior: smooth;
   /*background-color: #d8b03b;*/
   /*background: rgb(255,87,121);*/
-  background: rgb(255,107,107);
-  background: radial-gradient(circle, rgb(245, 159, 0) 0%, rgb(213, 112, 32) 80%, rgb(227, 102, 32) 95%);
+  background: rgb(255, 107, 107);
+  background: radial-gradient(
+    circle,
+    rgb(245, 159, 0) 0%,
+    rgb(213, 112, 32) 80%,
+    rgb(227, 102, 32) 95%
+  );
 }
 body {
   height: 100%;
@@ -88,14 +93,15 @@ body {
   );
 }
 
-.kartButtonDisabled {
-  width: 10rem;
-  height: 3rem;
+.kartButton.kartButtonDisabled {
   border: 1px solid #fff;
-  border-radius: 1.5rem;
-  background-color: rgba(179, 174, 174, 0.8);
+  background: linear-gradient(
+    90deg,
+    rgba(173, 181, 189, 1) 0%,
+    rgba(134, 142, 150, 1) 100%
+  );
   margin: 0 5px;
-  color: #ccc;
+  color: #e9ecef;
   cursor: not-allowed;
   transition: 100ms ease-in;
 }
@@ -165,8 +171,12 @@ body {
   margin-bottom: 1rem;
   justify-content: space-around;
   align-items: center;
-  background: rgb(245,159,0);
-  background: radial-gradient(circle, rgba(245,159,0,1) 0%, rgba(2,0,36,0.7) 100%);
+  background: rgb(245, 159, 0);
+  background: radial-gradient(
+    circle,
+    rgba(245, 159, 0, 1) 0%,
+    rgba(2, 0, 36, 0.7) 100%
+  );
   border: 0.3rem solid rgba(0, 0, 0, 0.6);
   border-radius: 0.5rem;
 }
@@ -270,6 +280,7 @@ body {
   font-weight: 500;
 }
 .bottom {
+  position: relative;
   margin-bottom: 5px;
   display: flex;
   flex-direction: column;
@@ -280,6 +291,10 @@ body {
   padding: 5px;
   background-color: #dad4c8;
   opacity: 0.9;
+}
+.bottom.border {
+  border: 0.2rem solid #adb5bd;
+  box-shadow: 0 1rem 3rem 0.1rem rgba(0, 0, 0, 1);
 }
 .bonus {
   font-size: 10px;

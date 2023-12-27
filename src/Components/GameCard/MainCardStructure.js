@@ -1,9 +1,12 @@
-import "../Css/kart.css";
-import "./InMemory";
-import { EquipmentKart, MoneyKart, MonsterKart, PotionKart } from "./InMemory";
+import "../../Css/kart.css";
 import { useState } from "react";
+import { EquipmentKart, MoneyKart, MonsterKart, PotionKart } from "../InMemory";
+import { MonsterCardStructure } from "./MonsterCardStructure";
+import { PotionCardStructure } from "./PotionCardStructure";
+import { EquipmentCardStructure } from "./EquipmentCardStructure";
+import { MoneyCardStructure } from "./MoneyCardStructure";
 
-function Card({ selectedCard }) {
+function MainCardStructure({ selectedCard, zIndex = 0 }) {
   const [shadowStyle, setShadowStyle] = useState({
     boxShadow: "none",
   });
@@ -49,6 +52,7 @@ function Card({ selectedCard }) {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
+          zIndex: zIndex,
         }}
       ></div>
     );
@@ -65,6 +69,7 @@ function Card({ selectedCard }) {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        zIndex: zIndex,
         ...shadowStyle,
       }}
       onMouseEnter={() => onEnter()}
@@ -80,7 +85,7 @@ function Card({ selectedCard }) {
       </header>
 
       {selectedCard instanceof MonsterKart ? (
-        <MonsterCardProperty
+        <MonsterCardStructure
           attack={selectedCard.attack}
           health={selectedCard.health}
           shield={selectedCard.shield}
@@ -88,80 +93,24 @@ function Card({ selectedCard }) {
           talk={selectedCard.talk}
         />
       ) : selectedCard instanceof PotionKart ? (
-        <PotionCardProp
+        <PotionCardStructure
           bonus={selectedCard.bonus}
           talk={selectedCard.talk}
           moneyGain={selectedCard.moneyGain}
           healthGain={selectedCard.healthGain}
         />
       ) : selectedCard instanceof EquipmentKart ? (
-        <EquipmentCardProp
+        <EquipmentCardStructure
           cost={selectedCard.cost}
           talk={selectedCard.talk}
           bonus={selectedCard.bonus}
           power={selectedCard.power}
         />
       ) : (
-        <MoneyCard talk={selectedCard.talk} gain={selectedCard.gain} />
+        <MoneyCardStructure talk={selectedCard.talk} gain={selectedCard.gain} />
       )}
     </div>
   );
 }
 
-function MonsterCardProperty({ attack, health, shield, bonus, talk }) {
-  return (
-    <div className="bottom">
-      <div className="bonus">
-        Remove all exhaustion tokens from this unit at the end of each round.
-      </div>{" "}
-      <p className="talk">{talk}</p>
-      <div className="posions">
-        <span className="posion attack">Attack: {attack}</span>{" "}
-        <span className="posion shield">Shield :{shield}</span>{" "}
-        <span className="posion health">Health :{health}</span>
-      </div>
-    </div>
-  );
-}
-
-function PotionCardProp({ healthGain, moneyGain, talk, bonus }) {
-  return (
-    <div className="bottom">
-      <div className="bonus">
-        Remove all exhaustion tokens from this unit at the end of each round.
-      </div>
-      <p className="talk">{talk}</p>
-      <div className="posions">
-        <span className="posion health">HealthGain :{healthGain}</span>{" "}
-        <span className="posion">MoneyGain: {moneyGain}</span>
-      </div>
-    </div>
-  );
-}
-
-function EquipmentCardProp({ power, bonus, cost, talk }) {
-  return (
-    <div className="bottom">
-      <div className="bonus">
-        Remove all exhaustion tokens from this unit at the end of each round.
-      </div>
-      <p className="talk">{talk}</p>
-      <div className="posions">
-        <span className="posion">Power :{power}</span>{" "}
-        <span className="posion">Cost: {cost}</span>
-      </div>
-    </div>
-  );
-}
-function MoneyCard({ gain, talk }) {
-  return (
-    <div className="bottom">
-      <p className="talk">{talk}</p>
-      <div className="posions">
-        <span className="posion">Money Gain :{gain}</span>
-      </div>
-    </div>
-  );
-}
-
-export default Card;
+export default MainCardStructure;

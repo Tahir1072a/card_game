@@ -1,4 +1,10 @@
-import { EquipmentKart, Equipments, MonsterKart } from "./Components/InMemory";
+import {
+  EquipmentKart,
+  Equipments,
+  MoneyKart,
+  MonsterKart,
+  PotionKart,
+} from "./Components/InMemory";
 
 export class GameEngine {
   constructor(defaultEquipment, maxHealth) {
@@ -73,7 +79,31 @@ export class GameEngine {
   }
 
   IsWin(equipment, monsterLife) {
-    debugger;
     return equipment.power >= monsterLife;
+  }
+
+  GetBtnProp(card, monsterHandle, MoneyHandle, PotionHandle) {
+    const cardPropBtn = {
+      handleFunction: null,
+      name: "",
+    };
+
+    if (card instanceof MonsterKart) {
+      cardPropBtn.name = "Attack";
+      cardPropBtn.handleFunction = monsterHandle;
+
+      return cardPropBtn;
+    } else if (card instanceof MoneyKart) {
+      cardPropBtn.name = "Take";
+      cardPropBtn.handleFunction = MoneyHandle;
+
+      return cardPropBtn;
+    } else if (card instanceof PotionKart) {
+      cardPropBtn.name = "Drink";
+      cardPropBtn.handleFunction = PotionHandle;
+
+      return cardPropBtn;
+    }
+    return cardPropBtn;
   }
 }
