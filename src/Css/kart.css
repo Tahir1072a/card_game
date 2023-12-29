@@ -430,7 +430,7 @@ body {
 
 .info-popup {
   width: 105rem;
-  height: 77rem;
+  height: 79rem;
 
   font-size: 1.5rem;
 
@@ -447,20 +447,23 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 
-  padding: 2rem;
+  padding: 2.5rem;
 
-  background-image: linear-gradient(
-    rgba(0, 0, 0, 0.3),
-    rgba(225, 225, 225, 0.01)
-  );
+  background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.2));
   box-shadow: 0 0.5rem 5rem 0.2rem;
   backdrop-filter: blur(0.9rem);
 }
 .popup-p-tag {
   color: #f9db9c;
+
+  line-height: 2.1rem;
+
   display: grid;
-  grid-template-columns: 1fr 30fr;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  gap: 5px;
+}
+.private-words {
+  color: #562c0f;
+  font-weight: bold;
 }

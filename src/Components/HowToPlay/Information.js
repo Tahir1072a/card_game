@@ -34,6 +34,7 @@ function InfoPopup() {
   return (
     <div className="info-popup">
       <main>
+        {/* Nasıl Oynanır */}
         <div
           style={{
             marginBottom: "1.5rem",
@@ -46,13 +47,21 @@ function InfoPopup() {
               name="right-arrow-circle"
               style={{ fill: "#f9db9c" }}
             ></box-icon>{" "}
-            Oyuna masanın üstünde duran {gameInfo.gamePathNum} kapalı karttan
-            biri seçilerek başlanır. Oyundaki amaç her açtığımız kartı
-            karşılayabilmek ve ölmeden masadaki tüm kartları bitirmektir. Eğer
-            canımız bitmeden kartlar biterse oyuncu oyunu kazanmış olur
+            <div>
+              Oyuna masanın üstünde duran{" "}
+              <span className="private-words">
+                {gameInfo.gamePathNum} kapalı karttan
+              </span>{" "}
+              biri seçilerek başlanır.{" "}
+              <span className="private-words">Oyundaki amaç</span> her açtığımız
+              kartı karşılayabilmek ve ölmeden masadaki{" "}
+              <span className="private-words">tüm kartları bitirmektir</span>.
+              Eğer canımız bitmeden kartlar biterse oyuncu oyunu kazanmış olur.
+            </div>
           </p>
         </div>
 
+        {/* Kart Çeşitleri */}
         <div
           style={{
             marginBottom: "1.5rem",
@@ -68,11 +77,16 @@ function InfoPopup() {
               name="right-arrow-circle"
               style={{ fill: "#f9db9c" }}
             ></box-icon>{" "}
-            Oyunda {gameInfo.gameCardTypeNum} çeşit kart türü vardır. Bunlar
-            Monster, Ekipman, Potion(İksir) ve Money(Para) kartlarıdır. Bu
-            türlerde bulunan her kartın farklı özellikleri vardır. Bu özellikler
-            kartın üzerinde yazmakta ve oyuncu bundan hareketler seçimlerini
-            yapmalıdır. Aşağıda küçük bir örnek verilmiştir.
+            <div>
+              Oyunda {gameInfo.gameCardTypeNum} çeşit kart türü vardır. Bunlar{" "}
+              <span className="private-words">
+                Monster, Ekipman, Potion(İksir)
+              </span>{" "}
+              ve <span className="private-words">Money(Para)</span> kartlarıdır.
+              Bu türlerde bulunan her kartın farklı özellikleri vardır. Bu
+              özellikler kartın üzerinde yazmakta ve oyuncu bundan hareketle
+              seçimlerini yapmalıdır. Aşağıda küçük bir örnek verilmiştir.
+            </div>
           </p>
 
           <div
@@ -83,7 +97,7 @@ function InfoPopup() {
             }}
           >
             <img
-              style={{ width: "60rem" }}
+              style={{ width: "60rem", margin: "1rem 0" }}
               src={gameInfo.informationCardTypeImg}
               alt={"info"}
             />
@@ -94,12 +108,18 @@ function InfoPopup() {
               name="right-arrow-circle"
               style={{ fill: "#f9db9c" }}
             ></box-icon>
-            Görüldüğü üzere ekipman kartının üstünde Maliyeti(cost) ve
-            Gücü(power) yazmaktadır. Aynı şekilde monster kartının üzerinde de
-            shield(kalkan) vb. olmak üzere özellikler yazar.
+            <div>
+              Görüldüğü üzere ekipman kartının üstünde{" "}
+              <span className="private-words">Maliyeti(cost)</span> ve{" "}
+              <span className="private-words">Gücü(power)</span> yazmaktadır.
+              Aynı şekilde monster kartının üzerinde de{" "}
+              <span className="private-words">Shield(kalkan)</span> vb. olmak
+              üzere özellikler yazar.
+            </div>
           </p>
         </div>
 
+        {/* Oyun Mekaniği */}
         <div
           style={{
             display: "flex",
@@ -117,8 +137,11 @@ function InfoPopup() {
               name="right-arrow-circle"
               style={{ marginRight: "0.9rem", fill: "#f9db9c" }}
             ></box-icon>
-            Oyunda seçim yapılan kartların özellikleri oyuncu üzerine etki eder
-            ve oyun bu şekilde devam eder.{" "}
+            <div>
+              Oyunda seçim yapılan kartların özellikleri{" "}
+              <span className="private-words">oyuncu</span> üzerine etki eder ve
+              oyun bu şekilde devam eder.{" "}
+            </div>
           </p>
 
           <p className="popup-p-tag">
@@ -126,11 +149,17 @@ function InfoPopup() {
               name="right-arrow-circle"
               style={{ marginRight: "0.9rem", fill: "#f9db9c" }}
             ></box-icon>
-            Oyundaki savaş mekaniği şu şekildedir : Oyuncunun elinde ekipman
-            varsa ilgili ekipman monsterı yenebilecek güçte ise(kalkan + canı) o
-            zaman ekipman harcanır ve monster yenilir. Ancak gücü yetersiz
-            gelirse ekipman harcanmaz ve oyuncunun monster’ın gücü kadar canı
-            veya kalkanı azalır.
+            <div>
+              Oyundaki <span className="private-words">savaş mekaniği</span> şu
+              şekildedir : Oyuncunun elinde ekipman varsa ilgili ekipman
+              monster’ı yenebilecek güçte ise <span>(kalkan + canı)</span> o
+              zaman ekipman <span className="private-words">harcanır</span> ve{" "}
+              <span className="private-words">monster yenilir</span>. Ancak gücü
+              yetersiz gelirse{" "}
+              <span className="private-words">ekipman harcanmaz</span> ve
+              oyuncunun monster’ın gücü kadar{" "}
+              <span className="private-words">canı veya kalkanı azalır</span>.
+            </div>
           </p>
 
           <p className="popup-p-tag">
@@ -138,8 +167,10 @@ function InfoPopup() {
               name="right-arrow-circle"
               style={{ marginRight: "0.9rem", fill: "#f9db9c" }}
             ></box-icon>
-            Oyuncunun yeterli parası olduğu sürece çıkan kartlardan ekipman
-            almaya devam edebilir.{" "}
+            <div>
+              Oyuncunun yeterli parası olduğu sürece çıkan kartlardan ekipman
+              almaya devam edebilir.{" "}
+            </div>
           </p>
 
           <p className="popup-p-tag">
@@ -147,8 +178,11 @@ function InfoPopup() {
               name="right-arrow-circle"
               style={{ marginRight: "0.9rem", fill: "#f9db9c" }}
             ></box-icon>
-            Bu yazı size karmaşık geldiyse endişelenmeyin, oyun mantığı basittir
-            ve bir iki tür oynadıktan sonra rahat bir şekilde kavrayacaksınız.
+            <div>
+              Bu yazı size karmaşık geldiyse endişelenmeyin, oyun mantığı
+              basittir ve bir iki tür oynadıktan sonra rahat bir şekilde
+              kavrayacaksınız.
+            </div>
           </p>
         </div>
       </main>
