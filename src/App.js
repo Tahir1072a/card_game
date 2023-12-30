@@ -7,11 +7,11 @@ import { Information } from "./Components/HowToPlay/Information";
 
 const defaultEquipment = new EquipmentKart(
   -1,
-  "Equipment",
   "Yumruk",
   0,
-  "None",
-  "Sadece ellerim",
+  0,
+  "Gücü yok",
+  "Sıradan bir yumruk",
   0,
   1,
   process.env.PUBLIC_URL + `game/punch.jpg`,
@@ -25,6 +25,7 @@ const gamer = new Gamer(
   2,
   process.env.PUBLIC_URL + `game/avatar1.jpeg`,
 );
+
 const gameEngine = new GameEngine(defaultEquipment, 19);
 function App() {
   const [currentGamer, setGamer] = useState(gamer);

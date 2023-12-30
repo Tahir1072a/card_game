@@ -1,7 +1,7 @@
 import "../../Css/kart.css";
 export function Bar({ health, shield }) {
   const maxHealth = 19;
-
+  console.log(shield);
   return (
     <div className="bars">
       <BarContainer barName={"Health"}>

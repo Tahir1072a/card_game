@@ -42,6 +42,7 @@ export function EquipmentImg({ equipment, mightHover = false }) {
             power={equipment.power}
             cost={equipment.cost}
             talk={equipment.talk}
+            bonus_text={equipment.bonus_text}
             zIndex={10}
             className={"border"}
           />

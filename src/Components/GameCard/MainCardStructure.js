@@ -78,9 +78,14 @@ function MainCardStructure({ selectedCard, zIndex = 0 }) {
       <header className={"cardHeader"}>
         <h1>{selectedCard.name}</h1>
         <div className={"types"}>
-          <span>{selectedCard.type === "Monster" ? "Enemy" : "Ally"}</span>{" "}
+          <span>{selectedCard instanceof MonsterKart ? "Enemy" : "Ally"}</span>{" "}
           <span>&</span>
-          <span>{selectedCard.type}</span>
+          <span>
+            {selectedCard instanceof MonsterKart && "Monster"}
+            {selectedCard instanceof PotionKart && "Potion"}
+            {selectedCard instanceof EquipmentKart && "Equipment"}
+            {selectedCard instanceof MoneyKart && "Money"}
+          </span>
         </div>
       </header>
 
@@ -89,7 +94,7 @@ function MainCardStructure({ selectedCard, zIndex = 0 }) {
           attack={selectedCard.attack}
           health={selectedCard.health}
           shield={selectedCard.shield}
-          bonus={selectedCard.bonus}
+          bonus_text={selectedCard.bonus_text}
           talk={selectedCard.talk}
         />
       ) : selectedCard instanceof PotionKart ? (
@@ -103,7 +108,7 @@ function MainCardStructure({ selectedCard, zIndex = 0 }) {
         <EquipmentCardStructure
           cost={selectedCard.cost}
           talk={selectedCard.talk}
-          bonus={selectedCard.bonus}
+          bonus_text={selectedCard.bonus_text}
           power={selectedCard.power}
         />
       ) : (

@@ -14,7 +14,6 @@ let allCards = [...cards];
 
 const defaultCard = new myCard(
   -1,
-  "default",
   "no-name",
   0,
   process.env.PUBLIC_URL + `game/background.jpeg`,
