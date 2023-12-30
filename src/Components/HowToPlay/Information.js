@@ -124,7 +124,7 @@ function InfoPopup() {
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "start",
+            alignItems: "flex-start",
             gap: ".5rem",
           }}
         >
