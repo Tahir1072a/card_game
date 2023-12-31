@@ -1,10 +1,11 @@
-import {
+import cards, {
   EquipmentKart,
   Equipments,
   MoneyKart,
   MonsterKart,
   PotionKart,
 } from "./Components/InMemory";
+import { MonsterBonusTypes } from "./Components/BonusTypes";
 
 export class GameEngine {
   constructor(defaultEquipment, maxHealth) {
@@ -49,7 +50,6 @@ export class GameEngine {
   }
   DeleteEquipment(setGamer, equipment) {
     if (equipment.id === -1) return;
-    console.log(equipment.id);
     setGamer((old) => ({
       ...old,
       equipments: old.equipments.filter((eq) => eq.id !== equipment.id),
@@ -65,21 +65,65 @@ export class GameEngine {
   }
 
   Attack(gamer, setGamer, selectedEquipment, setSelectedEquipment, monster) {
-    if (monster instanceof MonsterKart) {
-      const monsterLife = monster.shield + monster.health;
-      if (selectedEquipment instanceof EquipmentKart) {
-        if (selectedEquipment.power < monsterLife) {
-          this.SetShield(gamer, setGamer, -monster.attack);
-        } else {
-          this.DeleteEquipment(setGamer, selectedEquipment);
-          this.ChangeSelectedEquipment(setSelectedEquipment);
-        }
+    if (!(monster instanceof MonsterKart)) return;
+    if (!(selectedEquipment instanceof EquipmentKart)) return;
+
+    const monster_life = this.CalculateMonsterLife(selectedEquipment, monster);
+    const equipment_power = this.CalculateEquipmentPower(
+      selectedEquipment,
+      monster,
+    );
+
+    if (equipment_power < monster_life) {
+      if (monster.bonus === MonsterBonusTypes.IGNORE) {
+        this.SetHealth(gamer, setGamer, -monster.attack);
+      } else {
+        this.SetShield(gamer, setGamer, -monster.attack);
       }
+    } else {
+      this.DeleteEquipment(setGamer, selectedEquipment);
+      this.ChangeSelectedEquipment(setSelectedEquipment);
     }
   }
+  CalculateEquipmentPower(equipment, monster) {
+    if (!(monster instanceof MonsterKart)) return;
+    if (!(equipment instanceof EquipmentKart)) return;
 
-  IsWin(equipment, monsterLife) {
-    return equipment.power >= monsterLife;
+    if (monster.bonus === MonsterBonusTypes.IGNORE_ARMOR_LIGHT) {
+      if (equipment.type === MonsterBonusTypes.IGNORE_ARMOR_LIGHT) {
+        return 0;
+      }
+      return equipment.power;
+    }
+
+    return equipment.power;
+  }
+  CalculateMonsterLife(selected_equipment, monster) {
+    let monster_life = 0;
+
+    if (!(monster instanceof MonsterKart)) return;
+
+    if (selected_equipment.bonus !== 0) {
+      if (selected_equipment.bonus !== -1) {
+        let remaining_shield = monster.shield - selected_equipment.bonus;
+        if (remaining_shield > 0) {
+          monster_life = remaining_shield + monster.health;
+        } else if (remaining_shield <= 0) {
+          monster_life = monster.health;
+        }
+      } else if (selected_equipment.bonus === -1) {
+        monster_life = monster.health;
+      }
+    } else {
+      monster_life = monster.health + monster.shield;
+    }
+
+    return monster_life;
+  }
+  IsWin(equipment, monster) {
+    const monster_life = this.CalculateMonsterLife(equipment, monster);
+    const equipmentPower = this.CalculateEquipmentPower(equipment, monster);
+    return equipmentPower >= monster_life;
   }
 
   GetBtnProp(card, monsterHandle, MoneyHandle, PotionHandle) {
@@ -105,5 +149,67 @@ export class GameEngine {
       return cardPropBtn;
     }
     return cardPropBtn;
+  }
+
+  CardBonusCycle(selectedCard, setSelectedCard, all_cards, zehir) {
+    if (!(selectedCard instanceof MonsterKart)) return;
+    if (selectedCard.bonus === MonsterBonusTypes.NULL) return;
+    const copy_monster = this.DeepCopyMonster(selectedCard);
+    if (selectedCard.bonus === MonsterBonusTypes.INCREASE_SHIELD) {
+      copy_monster.shield = copy_monster.shield + 1;
+    } else if (selectedCard.bonus === MonsterBonusTypes.INCREASE_POWER) {
+      copy_monster.attack = copy_monster.attack + 1;
+    } else if (selectedCard.bonus === MonsterBonusTypes.INCREASE_HEALTH) {
+      copy_monster.health = copy_monster.health + 1;
+    } else if (selectedCard.bonus === MonsterBonusTypes.ADDER_POISON) {
+      const isZehirExist = all_cards.map((cards) =>
+        cards.some((card) => card.name === "Zehir"),
+      );
+      if (isZehirExist.includes(true)) {
+        all_cards = all_cards.map((cards) => this.ChangePotionCard(cards));
+      } else {
+        const isFirstElementPotionKart = all_cards[0][0] instanceof PotionKart;
+
+        if (isFirstElementPotionKart) {
+          all_cards[0].push(zehir);
+        } else {
+          all_cards.push([zehir]);
+        }
+      }
+    }
+    setSelectedCard(copy_monster);
+  }
+
+  ChangePotionCard(cards) {
+    if (!(cards[0] instanceof PotionKart)) return cards;
+
+    cards = cards.map((card) => {
+      if (card.name !== "Zehir") return card;
+      if (card.copyCount > 3) return card;
+      card.copyCount = card.copyCount + 1;
+      return card;
+    });
+
+    return cards;
+  }
+
+  DeepCopyMonster(monster_object) {
+    const copy_obj = Object.assign({}, monster_object);
+    return new MonsterKart(
+      copy_obj.id,
+      copy_obj.name,
+      copy_obj.attack,
+      copy_obj.health,
+      copy_obj.shield,
+      copy_obj.bonus_text,
+      copy_obj.bonus,
+      copy_obj.talk,
+      copy_obj.copyCount,
+      copy_obj.pngUrl,
+    );
+  }
+
+  Log(selectedCard) {
+    console.log("Game Engine" + " " + selectedCard.name);
   }
 }

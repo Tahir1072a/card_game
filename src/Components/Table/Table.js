@@ -1,5 +1,5 @@
 import "../../Css/kart.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import cards, {
   EquipmentKart,
   MoneyKart,
@@ -19,6 +19,16 @@ const defaultCard = new myCard(
   process.env.PUBLIC_URL + `game/background.jpeg`,
 );
 
+const potion5 = new PotionKart(
+  4,
+  "Zehir",
+  -5,
+  -2,
+  "poisoned",
+  2,
+  process.env.PUBLIC_URL + `game/posion.jpg`,
+);
+
 export function Table({ children }) {
   return <div className={"table"}>{children}</div>;
 }
@@ -28,10 +38,19 @@ export function CurrentCard({
   setGamer,
   setSelectedEquipment,
   gameEngine,
+  round,
+  setRound,
 }) {
   const [selectedCard, setSelectedCard] = useState(defaultCard);
   const [isOpen, setStateOpen] = useState(false);
   const [isHidden, setHiddenState] = useState(true);
+
+  useEffect(() => {
+    if (allCards.length < 1) {
+      return;
+    }
+    gameEngine.CardBonusCycle(selectedCard, setSelectedCard, allCards, potion5);
+  }, [round]);
 
   function select() {
     if (allCards.length < 1) {
@@ -52,6 +71,8 @@ export function CurrentCard({
     } else {
       allCards[typeIndex][cardIndex].copyCount += -1;
     }
+
+    setRound((old) => old + 1);
   }
 
   function handleMoneyTake(selectedCard) {

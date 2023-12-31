@@ -1,4 +1,4 @@
-import { MonsterBonusTypes } from "./BonusTypes";
+import { EquipmentTypes, MonsterBonusTypes } from "./BonusTypes";
 
 export class Gamer {
   constructor(id, name, equipments, health, shield, money, pngUrl) {
@@ -25,6 +25,7 @@ export class EquipmentKart extends myCard {
     id,
     name,
     power,
+    type,
     bonus,
     bonus_text,
     talk,
@@ -34,6 +35,7 @@ export class EquipmentKart extends myCard {
   ) {
     super(id, name, copyCount, pngUrl);
     this.power = power;
+    this.type = type;
     this.bonus = bonus;
     this.bonus_text = bonus_text;
     this.cost = cost;
@@ -127,7 +129,7 @@ const potion5 = new PotionKart(
   -5,
   -2,
   "poisoned",
-  2,
+  1,
   process.env.PUBLIC_URL + `game/posion.jpg`,
 );
 
@@ -136,6 +138,7 @@ const equipment1 = new EquipmentKart(
   0,
   "Kısa Kılıç",
   2,
+  EquipmentTypes.LIGHT,
   0,
   "Normal bir kılıç",
   "Kısa kılıç ile hızlı ve etkili bir saldırı yap!",
@@ -148,6 +151,7 @@ const equipment2 = new EquipmentKart(
   1,
   "Uzun Kılıç",
   3,
+  EquipmentTypes.LIGHT,
   2,
   "Kalkanlara +2 fazladan vurur",
   "Güçlü ve keskin uzun kılıç!",
@@ -160,6 +164,7 @@ const equipment3 = new EquipmentKart(
   2,
   "Kısa Balta",
   4,
+  EquipmentTypes.LIGHT,
   1,
   "Kalkanlara +1 fazladan vurur",
   "Kısa baltayla hızlıca işleri halledin!",
@@ -172,6 +177,7 @@ const equipment4 = new EquipmentKart(
   3,
   "Uzun Balta",
   5,
+  EquipmentTypes.MEDIUM,
   3,
   "Kalkanlara +3 fazladan vurur",
   "Güçlü ve etkili bir uzun baltaya sahip olun!",
@@ -184,6 +190,7 @@ const equipment5 = new EquipmentKart(
   4,
   "Topuz",
   5,
+  EquipmentTypes.MEDIUM,
   5,
   "Kalkanlara +5 fazladan vurur",
   "Topuzla rakiplerinizi ezin!",
@@ -196,6 +203,7 @@ const equipment6 = new EquipmentKart(
   5,
   "Tüfek",
   7,
+  EquipmentTypes.HEAVY,
   -1,
   "Düşman kalkanlarını yok sayar!",
   "Uzaktan saldırı için güçlü bir tüfek!",
@@ -208,6 +216,7 @@ const equipment7 = new EquipmentKart(
   6,
   "Bomba",
   10,
+  EquipmentTypes.HEAVY,
   -1,
   "Düşman kalkanlarını yok sayar",
   "Patlayıcı bir bomba!",
@@ -372,10 +381,10 @@ const monster9 = new MonsterKart(
   8,
   "Golem",
   2,
-  5,
+  3,
   10,
-  "Hafif tip silahları zırhını delemez",
-  MonsterBonusTypes.ARMOR_LIGHT,
+  "Herhangi bir bonusu yok.",
+  MonsterBonusTypes.NULL,
   "Ben Golem, taş gibi güçlüyüm!",
   2,
   process.env.PUBLIC_URL + `game/golem.jpg`,
@@ -384,11 +393,11 @@ const monster9 = new MonsterKart(
 const monster10 = new MonsterKart(
   9,
   "Minator",
-  4,
   5,
-  1,
-  "Sıradan bir canavar",
-  MonsterBonusTypes.NULL,
+  2,
+  3,
+  "Hafif silahlar bana etki etmez!",
+  MonsterBonusTypes.IGNORE_ARMOR_LIGHT,
   "Minator burada, savaşa hazırım!",
   2,
   process.env.PUBLIC_URL + `game/minator.jpg`,

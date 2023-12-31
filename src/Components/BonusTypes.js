@@ -5,11 +5,23 @@ export class MonsterBonusTypes {
 }
 
 Object.defineProperties(MonsterBonusTypes, {
-  INCREASE_HEALTH: { value: 1 },
-  INCREASE_SHIELD: { value: 1 },
-  INCREASE_POWER: { value: 1 },
+  INCREASE_HEALTH: { value: "Health" },
+  INCREASE_SHIELD: { value: "Shield" },
+  INCREASE_POWER: { value: "Power" },
   ADDER_POISON: { value: "Zehir" },
   NULL: { value: null },
-  ARMOR_LIGHT: { value: "Light" },
-  IGNORE: { value: "Shield" },
+  IGNORE_ARMOR_LIGHT: { value: "Light" },
+  IGNORE: { value: "Shield_Ignore" },
+});
+
+export class EquipmentTypes {
+  constructor(type) {
+    this.type = type;
+  }
+}
+
+Object.defineProperties(EquipmentTypes, {
+  LIGHT: { value: "Light" },
+  MEDIUM: { value: "Medium" },
+  HEAVY: { value: "Heavy" },
 });

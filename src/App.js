@@ -9,6 +9,7 @@ const defaultEquipment = new EquipmentKart(
   -1,
   "Yumruk",
   0,
+  "",
   0,
   "Gücü yok",
   "Sıradan bir yumruk",
@@ -23,13 +24,14 @@ const gamer = new Gamer(
   19,
   19,
   2,
-  process.env.PUBLIC_URL + `game/avatar1.jpeg`,
+  process.env.PUBLIC_URL + `game/avatar1.jpg`,
 );
 
 const gameEngine = new GameEngine(defaultEquipment, 19);
 function App() {
   const [currentGamer, setGamer] = useState(gamer);
   const [selectedEquipment, setSelectedEquipment] = useState(defaultEquipment);
+  const [round, setRound] = useState(0);
 
   return (
     <div className="app">
@@ -49,6 +51,8 @@ function App() {
             selectedEquipment={selectedEquipment}
             setSelectedEquipment={setSelectedEquipment}
             gameEngine={gameEngine}
+            round={round}
+            setRound={setRound}
           />
         ))}
       </Table>

@@ -24,7 +24,7 @@ export function AttackBox({ gameEngine, onAttack, monster, gamer, children }) {
 
   function handleAttack(equipment) {
     setIsAttack(true);
-    setIsDefeat(!gameEngine.IsWin(equipment, monster.health + monster.shield));
+    setIsDefeat(!gameEngine.IsWin(equipment, monster));
     setTimeout(() => setOpacity(0), 1000);
     setTimeout(() => {
       onAttack(monster, equipment);
