@@ -33,7 +33,7 @@ body {
 
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: start;
   gap: 25px;
 
   padding: 10px;
@@ -155,7 +155,7 @@ body {
 .bar-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: start;
   gap: 1px;
 }
 .bars {
@@ -449,7 +449,14 @@ body {
 
   padding: 2.5rem;
 
-  background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.2));
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.2)); */
+  background: rgb(255, 107, 107);
+  background: radial-gradient(
+    circle,
+    rgb(245, 159, 0) 0%,
+    rgb(213, 112, 32) 80%,
+    rgb(227, 102, 32) 95%
+  );
   box-shadow: 0 0.5rem 5rem 0.2rem;
   backdrop-filter: blur(0.9rem);
 }
@@ -464,6 +471,13 @@ body {
   gap: 5px;
 }
 .private-words {
-  color: #562c0f;
+  color: rgb(69, 67, 65);
   font-weight: bold;
+  font-style: italic;
+}
+
+.top-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
