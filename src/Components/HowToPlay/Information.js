@@ -64,7 +64,9 @@ function InfoPopup() {
             marginBottom: "1.5rem",
           }}
         >
-          <h1 style={{ color: "rgb(49, 47, 45);" }}>Nasıl Oynanır?</h1>
+          <h2 style={{ color: "#000", marginBottom: "1rem" }}>
+            Nasıl Oynanır?
+          </h2>
 
           <p className="popup-p-tag">
             <box-icon
