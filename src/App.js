@@ -15,7 +15,7 @@ const defaultEquipment = new EquipmentKart(
   "Sıradan bir yumruk",
   0,
   1,
-  process.env.PUBLIC_URL + `game/punch.jpg`,
+  process.env.PUBLIC_URL + `game/punch.jpg`
 );
 const gamer = new Gamer(
   0,
@@ -24,7 +24,7 @@ const gamer = new Gamer(
   19,
   19,
   2,
-  process.env.PUBLIC_URL + `game/avatar1.jpg`,
+  process.env.PUBLIC_URL + `game/avatar1.jpg`
 );
 
 const gameEngine = new GameEngine(defaultEquipment, 19);
@@ -35,13 +35,15 @@ function App() {
 
   return (
     <div className="app">
-      <GamerProfile
-        gamer={currentGamer}
-        selectedEquipment={selectedEquipment}
-        setSelectedEquipment={setSelectedEquipment}
-        gameEngine={gameEngine}
-      />
-      <Information />
+      <div className="top-content">
+        <GamerProfile
+          gamer={currentGamer}
+          selectedEquipment={selectedEquipment}
+          setSelectedEquipment={setSelectedEquipment}
+          gameEngine={gameEngine}
+        />
+        <Information />
+      </div>
       <Table>
         {[0, 1, 2, 3].map((p) => (
           <CurrentCard

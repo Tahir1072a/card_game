@@ -16,13 +16,37 @@ export function Information() {
   }
 
   return (
-    <div style={{ fontSize: "3rem" }}>
-      <span style={{ cursor: "pointer" }} onClick={HandleEnterEvent}>
-        <box-icon
-          name="info-circle"
-          style={{ fill: "#f9db9c", fontSize: "2rem" }}
-        ></box-icon>
-      </span>
+    <div
+      style={{
+        border: "2px solid #454341",
+        backgroundColor: "#454341",
+        padding: "1rem 2rem",
+        borderRadius: "5rem",
+        cursor: "pointer",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "1rem",
+          cursor: "pointer",
+        }}
+      >
+        <span style={{ cursor: "pointer" }} onClick={HandleEnterEvent}>
+          <box-icon
+            name="info-circle"
+            style={{ fill: "#f9db9c", fontSize: "2rem" }}
+          ></box-icon>
+        </span>
+
+        <div
+          className="game-version"
+          style={{ fontSize: "1.6rem", color: "#f9db9c" }}
+        >
+          v0.1.0
+        </div>
+      </div>
 
       {isEntered && <InfoPopup />}
     </div>
@@ -40,7 +64,9 @@ function InfoPopup() {
             marginBottom: "1.5rem",
           }}
         >
-          <h1 style={{ color: "#EE9631" }}>Nasıl Oynanır?</h1>
+          <h2 style={{ color: "#000", marginBottom: "1rem" }}>
+            Nasıl Oynanır?
+          </h2>
 
           <p className="popup-p-tag">
             <box-icon
@@ -70,7 +96,7 @@ function InfoPopup() {
             gap: ".3rem",
           }}
         >
-          <h2 style={{ color: "#EE9631" }}>Kart Çeşitleri</h2>
+          <h2 style={{ color: "rgb(49, 47, 45);" }}>Kart Çeşitleri</h2>
 
           <p className="popup-p-tag">
             <box-icon
@@ -128,7 +154,7 @@ function InfoPopup() {
             gap: ".5rem",
           }}
         >
-          <h2 style={{ color: "#EE9631", marginBottom: ".5rem" }}>
+          <h2 style={{ color: "rgb(49, 47, 45);", marginBottom: ".5rem" }}>
             Oyun Mekaniği
           </h2>
 
