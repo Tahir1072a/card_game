@@ -1,4 +1,5 @@
 import "../../Css/kart.css";
+import { EquipmentTypes } from "../BonusTypes";
 export function EquipmentCardStructure({
   power,
   bonus_text,

@@ -1,16 +1,9 @@
 import "../../Css/kart.css";
 import React, { useEffect, useState } from "react";
-import cards, {
-  EquipmentKart,
-  MoneyKart,
-  myCard,
-  PotionKart,
-} from "../InMemory";
+import { EquipmentKart, MoneyKart, myCard, PotionKart } from "../InMemory";
 import MainCardStructure from "../GameCard/MainCardStructure";
 import { CardButton } from "../Reusables/CardComponent";
 import { AttackBox } from "./AttackBox";
-
-let allCards = [...cards];
 
 const defaultCard = new myCard(
   -1,
@@ -40,36 +33,48 @@ export function CurrentCard({
   gameEngine,
   round,
   setRound,
+  all_cards,
+  setAllCards,
 }) {
   const [selectedCard, setSelectedCard] = useState(defaultCard);
   const [isOpen, setStateOpen] = useState(false);
   const [isHidden, setHiddenState] = useState(true);
 
   useEffect(() => {
-    if (allCards.length < 1) {
+    if (all_cards.length < 1) {
       return;
     }
-    gameEngine.CardBonusCycle(selectedCard, setSelectedCard, allCards, potion5);
+    gameEngine.CardBonusCycle(
+      selectedCard,
+      setSelectedCard,
+      all_cards,
+      potion5,
+    );
   }, [round]);
 
   function select() {
-    if (allCards.length < 1) {
+    if (all_cards.length < 1) {
       alert("Oyun Bitti Kazandınız!");
       window.location.reload();
       return;
     }
 
-    const typeIndex = Math.floor(Math.random() * allCards.length);
-    const cardIndex = Math.floor(Math.random() * allCards[typeIndex].length);
+    const typeIndex = Math.floor(Math.random() * all_cards.length);
+    const cardIndex = Math.floor(Math.random() * all_cards[typeIndex].length);
 
     setStateOpen(true);
-    setSelectedCard(allCards[typeIndex][cardIndex]);
-    if (allCards[typeIndex][cardIndex].copyCount <= 1) {
-      allCards = allCards
-        .map((p) => p.filter((s) => s !== allCards[typeIndex][cardIndex]))
-        .filter((k) => k.length > 0);
+    setSelectedCard(all_cards[typeIndex][cardIndex]);
+    if (all_cards[typeIndex][cardIndex].copyCount <= 1) {
+      setAllCards(
+        all_cards
+          .map((p) => p.filter((s) => s !== all_cards[typeIndex][cardIndex]))
+          .filter((k) => k.length > 0),
+      );
+      // all_cards = all_cards
+      //     .map((p) => p.filter((s) => s !== all_cards[typeIndex][cardIndex]))
+      //     .filter((k) => k.length > 0);
     } else {
-      allCards[typeIndex][cardIndex].copyCount += -1;
+      all_cards[typeIndex][cardIndex].copyCount += -1;
     }
 
     setRound((old) => old + 1);

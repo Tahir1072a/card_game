@@ -192,6 +192,7 @@ body {
   border: none;
   padding: 5px;
   border-radius: 1.5rem;
+  overflow: hidden;
 
   transition: 150ms ease-in;
   margin-bottom: 1.7rem;
@@ -480,4 +481,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.equipment-tag {
+  position: absolute;
+  background-color: coral;
+  padding: 0.8rem 3rem;
+  top: 6%;
+  right: -14%;
+  text-transform: uppercase;
+  font-weight: 500;
+  transform: rotate(45deg);
 }

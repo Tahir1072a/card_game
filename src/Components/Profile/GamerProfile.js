@@ -2,7 +2,7 @@ import "../../Css/kart.css";
 import { GamerEquipmentGroup } from "./GamerEquipments";
 import { Bar } from "./GamerBars";
 
-export function GamerProfile({ gamer }) {
+export function GamerProfile({ gamer, deck_count }) {
   return (
     <div className={"gamer"}>
       <div className="gamer-profile">
@@ -19,6 +19,9 @@ export function GamerProfile({ gamer }) {
       <Bar health={gamer.health} shield={gamer.shield} />
 
       <div className="balance">Money: ${gamer.money}</div>
+      <div style={{ color: "white" }}>
+        <img /> {deck_count}
+      </div>
       <GamerEquipmentGroup gamer={gamer} />
     </div>
   );

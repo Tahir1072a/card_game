@@ -1,5 +1,5 @@
-import { EquipmentKart, Gamer } from "./Components/InMemory";
-import React, { useState } from "react";
+import cards, { EquipmentKart, Gamer } from "./Components/InMemory";
+import React, { useRef, useState } from "react";
 import { GameEngine } from "./Engine";
 import { GamerProfile } from "./Components/Profile/GamerProfile";
 import { CurrentCard, Table } from "./Components/Table/Table";
@@ -15,7 +15,7 @@ const defaultEquipment = new EquipmentKart(
   "Sıradan bir yumruk",
   0,
   1,
-  process.env.PUBLIC_URL + `game/punch.jpg`
+  process.env.PUBLIC_URL + `game/punch.jpg`,
 );
 const gamer = new Gamer(
   0,
@@ -24,7 +24,7 @@ const gamer = new Gamer(
   19,
   19,
   2,
-  process.env.PUBLIC_URL + `game/avatar1.jpg`
+  process.env.PUBLIC_URL + `game/avatar1.jpg`,
 );
 
 const gameEngine = new GameEngine(defaultEquipment, 19);
@@ -32,7 +32,12 @@ function App() {
   const [currentGamer, setGamer] = useState(gamer);
   const [selectedEquipment, setSelectedEquipment] = useState(defaultEquipment);
   const [round, setRound] = useState(0);
-
+  const [all_cards, setAllCards] = useState([...cards]);
+  const deck_number = all_cards.reduce(
+    (prev, curr) =>
+      prev + curr.reduce((prev, card) => card.copyCount + prev, 0),
+    0,
+  );
   return (
     <div className="app">
       <div className="top-content">
@@ -41,6 +46,7 @@ function App() {
           selectedEquipment={selectedEquipment}
           setSelectedEquipment={setSelectedEquipment}
           gameEngine={gameEngine}
+          deck_count={deck_number}
         />
         <Information />
       </div>
@@ -55,6 +61,8 @@ function App() {
             gameEngine={gameEngine}
             round={round}
             setRound={setRound}
+            all_cards={all_cards}
+            setAllCards={setAllCards}
           />
         ))}
       </Table>

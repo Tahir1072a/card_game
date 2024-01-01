@@ -1,4 +1,5 @@
 import { useState } from "react";
+import packageJson from "../../../package.json";
 
 class GameInformation {
   constructor(gamePathNum, gameCardTypeNum, informationCardTypeImg) {
@@ -44,7 +45,7 @@ export function Information() {
           className="game-version"
           style={{ fontSize: "1.6rem", color: "#f9db9c" }}
         >
-          v0.1.0
+          {packageJson.version}
         </div>
       </div>
 

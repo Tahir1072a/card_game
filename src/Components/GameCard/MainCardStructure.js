@@ -5,6 +5,7 @@ import { MonsterCardStructure } from "./MonsterCardStructure";
 import { PotionCardStructure } from "./PotionCardStructure";
 import { EquipmentCardStructure } from "./EquipmentCardStructure";
 import { MoneyCardStructure } from "./MoneyCardStructure";
+import { EquipmentTypes } from "../BonusTypes";
 
 function MainCardStructure({ selectedCard, zIndex = 0 }) {
   const [shadowStyle, setShadowStyle] = useState({
@@ -105,12 +106,21 @@ function MainCardStructure({ selectedCard, zIndex = 0 }) {
           healthGain={selectedCard.healthGain}
         />
       ) : selectedCard instanceof EquipmentKart ? (
-        <EquipmentCardStructure
-          cost={selectedCard.cost}
-          talk={selectedCard.talk}
-          bonus_text={selectedCard.bonus_text}
-          power={selectedCard.power}
-        />
+        <>
+          <EquipmentCardStructure
+            cost={selectedCard.cost}
+            talk={selectedCard.talk}
+            bonus_text={selectedCard.bonus_text}
+            power={selectedCard.power}
+          />
+          <div className={"equipment-tag"}>
+            {selectedCard.type === EquipmentTypes.LIGHT
+              ? "Hafif ekipman"
+              : selectedCard.type === EquipmentTypes.MEDIUM
+              ? "Orta ekipman"
+              : "Ağır ekipman"}
+          </div>
+        </>
       ) : (
         <MoneyCardStructure talk={selectedCard.talk} gain={selectedCard.gain} />
       )}
