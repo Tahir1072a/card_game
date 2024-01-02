@@ -32,12 +32,16 @@ function App() {
   const [currentGamer, setGamer] = useState(gamer);
   const [selectedEquipment, setSelectedEquipment] = useState(defaultEquipment);
   const [round, setRound] = useState(0);
-  const [all_cards, setAllCards] = useState([...cards]);
-  const deck_number = all_cards.reduce(
+  const [deck, setDeck] = useState([...cards]);
+
+  const [isGamerAttack, setGamerAttack] = useState(false);
+
+  const deckCount = deck.reduce(
     (prev, curr) =>
       prev + curr.reduce((prev, card) => card.copyCount + prev, 0),
     0,
   );
+
   return (
     <div className="app">
       <div className="top-content">
@@ -46,7 +50,7 @@ function App() {
           selectedEquipment={selectedEquipment}
           setSelectedEquipment={setSelectedEquipment}
           gameEngine={gameEngine}
-          deck_count={deck_number}
+          deck_count={deckCount}
         />
         <Information />
       </div>
@@ -56,13 +60,14 @@ function App() {
             key={p}
             gamer={currentGamer}
             setGamer={setGamer}
-            selectedEquipment={selectedEquipment}
             setSelectedEquipment={setSelectedEquipment}
             gameEngine={gameEngine}
             round={round}
             setRound={setRound}
-            all_cards={all_cards}
-            setAllCards={setAllCards}
+            deck={deck}
+            setDeck={setDeck}
+            isGamerAttack={isGamerAttack}
+            setGamerAttack={setGamerAttack}
           />
         ))}
       </Table>

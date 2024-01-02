@@ -10,8 +10,8 @@ export function CardButton({
   return (
     <button
       className={`kartButton ${className}`}
-      onClick={onClick}
       disabled={disabled}
+      onClick={onClick}
     >
       {children}
     </button>

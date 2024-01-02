@@ -1,9 +1,13 @@
 import "../../Css/kart.css";
-import React, { useEffect, useState } from "react";
-import { EquipmentKart, MoneyKart, myCard, PotionKart } from "../InMemory";
+import React, { useEffect, useReducer, useState } from "react";
+import { myCard, PotionKart } from "../InMemory";
 import MainCardStructure from "../GameCard/MainCardStructure";
 import { CardButton } from "../Reusables/CardComponent";
 import { AttackBox } from "./AttackBox";
+import MoneyCardEvents from "./MoneyCardEvents";
+import PotionCardEvents from "./PotionCardEvents";
+import EquipmentsCardEvents from "./EquipmentsCardEvents";
+import MonsterCardEvents from "./MonsterCardEvents";
 
 const defaultCard = new myCard(
   -1,
@@ -22,6 +26,37 @@ const potion5 = new PotionKart(
   process.env.PUBLIC_URL + `game/posion.jpg`,
 );
 
+const initialState = {
+  hiddenAttackBox: true,
+  cardType: null,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "open_new_card":
+      return {
+        ...state,
+        cardType: action.payload,
+      };
+    case "close_card":
+      return {
+        ...state,
+        cardType: null,
+      };
+    case "set_hidden_state":
+      return {
+        ...state,
+        hiddenAttackBox: action.payload,
+      };
+    case "finish_attack":
+      return {
+        ...state,
+        cardType: null,
+        hiddenAttackBox: true,
+      };
+  }
+}
+
 export function Table({ children }) {
   return <div className={"table"}>{children}</div>;
 }
@@ -33,87 +68,40 @@ export function CurrentCard({
   gameEngine,
   round,
   setRound,
-  all_cards,
-  setAllCards,
+  deck,
+  setDeck,
+  isGamerAttack,
+  setGamerAttack,
 }) {
   const [selectedCard, setSelectedCard] = useState(defaultCard);
-  const [isOpen, setStateOpen] = useState(false);
-  const [isHidden, setHiddenState] = useState(true);
+  const [{ hiddenAttackBox, cardType }, dispatch] = useReducer(
+    reducer,
+    initialState,
+  );
 
   useEffect(() => {
-    if (all_cards.length < 1) {
-      return;
-    }
     gameEngine.CardBonusCycle(
       selectedCard,
       setSelectedCard,
-      all_cards,
+      deck,
+      setDeck,
       potion5,
     );
   }, [round]);
 
   function select() {
-    if (all_cards.length < 1) {
-      alert("Oyun Bitti Kazandınız!");
-      window.location.reload();
-      return;
-    }
-
-    const typeIndex = Math.floor(Math.random() * all_cards.length);
-    const cardIndex = Math.floor(Math.random() * all_cards[typeIndex].length);
-
-    setStateOpen(true);
-    setSelectedCard(all_cards[typeIndex][cardIndex]);
-    if (all_cards[typeIndex][cardIndex].copyCount <= 1) {
-      setAllCards(
-        all_cards
-          .map((p) => p.filter((s) => s !== all_cards[typeIndex][cardIndex]))
-          .filter((k) => k.length > 0),
-      );
-      // all_cards = all_cards
-      //     .map((p) => p.filter((s) => s !== all_cards[typeIndex][cardIndex]))
-      //     .filter((k) => k.length > 0);
-    } else {
-      all_cards[typeIndex][cardIndex].copyCount += -1;
-    }
-
+    gameEngine.SelectNewCard(setSelectedCard, deck, setDeck, dispatch);
     setRound((old) => old + 1);
   }
-
-  function handleMoneyTake(selectedCard) {
-    if (selectedCard instanceof MoneyKart) {
-      gameEngine.SetMoney(setGamer, selectedCard.gain);
-    }
+  function ResetCard() {
     setSelectedCard(defaultCard);
-    setStateOpen(false);
+    dispatch({ type: "close_card" });
   }
-  function drinkPotion() {
-    if (selectedCard instanceof PotionKart) {
-      gameEngine.SetHealth(gamer, setGamer, selectedCard.healthGain);
-      gameEngine.SetMoney(setGamer, selectedCard.moneyGain);
-    }
-
-    setSelectedCard(defaultCard);
-    setStateOpen(false);
-  }
-  function Buy(selectedCard) {
-    if (selectedCard instanceof EquipmentKart) {
-      gameEngine.AddEquipment(setGamer, selectedCard);
-      gameEngine.SetMoney(setGamer, -selectedCard.cost);
-    }
-
-    setSelectedCard(defaultCard);
-    setStateOpen(false);
-  }
-  function DontBuy() {
-    setStateOpen(false);
-    setSelectedCard(defaultCard);
-  }
-  function HandleAttack() {
-    setHiddenState((old) => !old);
+  function OpenAttackBox() {
+    dispatch({ type: "set_hidden_state", payload: false });
+    setGamerAttack(true);
   }
   function onAttack(monster, equipment) {
-    setHiddenState(true);
     gameEngine.Attack(
       gamer,
       setGamer,
@@ -121,46 +109,59 @@ export function CurrentCard({
       setSelectedEquipment,
       monster,
     );
+    dispatch({ type: "finish_attack" });
+    setGamerAttack(false);
     setSelectedCard(defaultCard);
-    setStateOpen(false);
   }
-
-  const cardType = gameEngine.GetBtnProp(
-    selectedCard,
-    HandleAttack,
-    handleMoneyTake,
-    drinkPotion,
-  );
 
   return (
     <div className={"pozisyon"}>
       <MainCardStructure selectedCard={selectedCard} />
-      {isOpen && !(selectedCard instanceof EquipmentKart) && (
-        <CardButton onClick={() => cardType.handleFunction(selectedCard)}>
-          {cardType.name}
+      {cardType && cardType === "Monster" && (
+        <MonsterCardEvents
+          isGamerAttack={isGamerAttack}
+          openAttackBox={OpenAttackBox}
+        />
+      )}
+      {cardType && cardType === "Money" && (
+        <MoneyCardEvents
+          selectedCard={selectedCard}
+          resetCard={ResetCard}
+          isGamerAttack={isGamerAttack}
+          setGamer={setGamer}
+          gameEngine={gameEngine}
+        />
+      )}
+      {cardType && cardType === "Potion" && (
+        <PotionCardEvents
+          gameEngine={gameEngine}
+          resetCard={ResetCard}
+          isGamerAttack={isGamerAttack}
+          setGamer={setGamer}
+          selectedCard={selectedCard}
+          gamer={gamer}
+        />
+      )}
+      {cardType && cardType === "Equipment" && (
+        <EquipmentsCardEvents
+          resetCard={ResetCard}
+          isGamerAttack={isGamerAttack}
+          setGamer={setGamer}
+          gameEngine={gameEngine}
+          selectedCard={selectedCard}
+          gamer={gamer}
+        />
+      )}
+      {cardType ? null : (
+        <CardButton
+          onClick={select}
+          disabled={isGamerAttack}
+          className={isGamerAttack ? "kartButtonDisabled" : ""}
+        >
+          Show
         </CardButton>
       )}
-      {isOpen && selectedCard instanceof EquipmentKart && (
-        <div>
-          <CardButton
-            className={
-              gamer.money >= selectedCard.cost
-                ? "kartButton"
-                : "kartButtonDisabled"
-            }
-            onClick={() => Buy(selectedCard)}
-            disabled={gamer.money < selectedCard.cost}
-          >
-            Buy
-          </CardButton>
-
-          <CardButton onClick={() => DontBuy(selectedCard)}>
-            Dont Buy
-          </CardButton>
-        </div>
-      )}
-      {isOpen || <CardButton onClick={select}>Show</CardButton>}
-      {isHidden || (
+      {hiddenAttackBox || (
         <AttackBox
           gameEngine={gameEngine}
           onAttack={onAttack}

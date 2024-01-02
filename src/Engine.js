@@ -1,4 +1,4 @@
-import cards, {
+import {
   EquipmentKart,
   Equipments,
   MoneyKart,
@@ -126,32 +126,48 @@ export class GameEngine {
     return equipmentPower >= monster_life;
   }
 
-  GetBtnProp(card, monsterHandle, MoneyHandle, PotionHandle) {
-    const cardPropBtn = {
-      handleFunction: null,
-      name: "",
-    };
-
+  GetCardType(card) {
     if (card instanceof MonsterKart) {
-      cardPropBtn.name = "Attack";
-      cardPropBtn.handleFunction = monsterHandle;
-
-      return cardPropBtn;
+      return "Monster";
     } else if (card instanceof MoneyKart) {
-      cardPropBtn.name = "Take";
-      cardPropBtn.handleFunction = MoneyHandle;
-
-      return cardPropBtn;
+      return "Money";
     } else if (card instanceof PotionKart) {
-      cardPropBtn.name = "Drink";
-      cardPropBtn.handleFunction = PotionHandle;
-
-      return cardPropBtn;
+      return "Potion";
     }
-    return cardPropBtn;
-  }
 
-  CardBonusCycle(selectedCard, setSelectedCard, all_cards, zehir) {
+    return "Equipment";
+  }
+  SelectNewCard(setSelectedCard, deck, setDeck, dispatch) {
+    if (this.IsDeckEmpty(deck)) {
+      alert("Oyun Bitti Kazandınız!");
+      window.location.reload();
+      return;
+    }
+    const { typeIndex, cardIndex } = this.Randomize(deck);
+    setSelectedCard(deck[typeIndex][cardIndex]);
+    if (deck[typeIndex][cardIndex].copyCount <= 1) {
+      setDeck(
+        deck
+          .map((p) => p.filter((s) => s !== deck[typeIndex][cardIndex]))
+          .filter((k) => k.length > 0),
+      );
+    } else {
+      deck[typeIndex][cardIndex].copyCount += -1;
+    }
+
+    dispatch({
+      type: "open_new_card",
+      payload: this.GetCardType(deck[typeIndex][cardIndex]),
+    });
+  }
+  Randomize(deck) {
+    const typeIndex = Math.floor(Math.random() * deck.length);
+    const cardIndex = Math.floor(Math.random() * deck[typeIndex].length);
+
+    return { typeIndex, cardIndex };
+  }
+  CardBonusCycle(selectedCard, setSelectedCard, deck, setDeck, zehir) {
+    if (this.IsDeckEmpty(deck)) return;
     if (!(selectedCard instanceof MonsterKart)) return;
     if (selectedCard.bonus === MonsterBonusTypes.NULL) return;
     const copy_monster = this.DeepCopyMonster(selectedCard);
@@ -162,18 +178,18 @@ export class GameEngine {
     } else if (selectedCard.bonus === MonsterBonusTypes.INCREASE_HEALTH) {
       copy_monster.health = copy_monster.health + 1;
     } else if (selectedCard.bonus === MonsterBonusTypes.ADDER_POISON) {
-      const isZehirExist = all_cards.map((cards) =>
+      const isZehirExist = deck.map((cards) =>
         cards.some((card) => card.name === "Zehir"),
       );
       if (isZehirExist.includes(true)) {
-        all_cards = all_cards.map((cards) => this.ChangePotionCard(cards));
+        setDeck(deck.map((cards) => this.ChangePotionCard(cards)));
       } else {
-        const isFirstElementPotionKart = all_cards[0][0] instanceof PotionKart;
+        const isFirstElementPotionKart = deck[0][0] instanceof PotionKart;
 
         if (isFirstElementPotionKart) {
-          all_cards[0].push(zehir);
+          deck[0].push(zehir);
         } else {
-          all_cards.push([zehir]);
+          deck.push([zehir]);
         }
       }
     }
@@ -209,7 +225,7 @@ export class GameEngine {
     );
   }
 
-  Log(selectedCard) {
-    console.log("Game Engine" + " " + selectedCard.name);
+  IsDeckEmpty(deck) {
+    return deck.length < 1;
   }
 }
