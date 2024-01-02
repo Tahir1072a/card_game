@@ -79,8 +79,8 @@ function SelectEquipment({ equipments, onAttack }) {
   return (
     <div className="equipment">
       <div className="main-equipment">
-        {equipments.map((p) => (
-          <div key={p.id} onClick={() => handleSelect(p.id)}>
+        {equipments.map((p, index) => (
+          <div key={index} onClick={() => handleSelect(p.id)}>
             <EquipmentImg equipment={p} />
           </div>
         ))}
