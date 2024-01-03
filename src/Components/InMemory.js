@@ -109,7 +109,7 @@ const potion3 = new PotionKart(
   1,
   2,
   "Gençleştim resmen bu kadar mı fark eder",
-  3,
+  2,
   process.env.PUBLIC_URL + `game/power.jpg`,
 );
 
@@ -308,7 +308,7 @@ const monster3 = new MonsterKart(
   "Sayko kalkanları görmezden gelir!",
   MonsterBonusTypes.IGNORE,
   "Sayko burada, kimse bana yaklaşmasın!",
-  1,
+  2,
   process.env.PUBLIC_URL + `game/sayko.jpg`,
 );
 
@@ -321,7 +321,7 @@ const monster4 = new MonsterKart(
   "Ölmediği her tur gücü +1 artar",
   MonsterBonusTypes.INCREASE_POWER,
   "Koska, güçlü bir rakip!",
-  1,
+  2,
   process.env.PUBLIC_URL + `game/koska.jpg`,
 );
 
